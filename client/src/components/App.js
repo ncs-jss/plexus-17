@@ -1,3 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+
 import React, { Component } from 'react';
 import { BrowserRouter, Route} from 'react-router-dom';
 import { connect } from 'react-redux';
