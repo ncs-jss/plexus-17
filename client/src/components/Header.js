@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 class Header extends Component {
     renderContent() {
+      console.log(this.props);
         switch(this.props.auth) {
             case null:
                 return;
@@ -21,7 +22,7 @@ class Header extends Component {
     }
     render() {
         return (
-            <nav className="navbar navbar-default">
+            <nav className="navbar">
               <div className="container-fluid">
                 <div className="navbar-header">
                   <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -30,13 +31,13 @@ class Header extends Component {
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                   </button>
-                  <a className="navbar-brand" href="/">Brand</a>
+                  <Link className="navbar-brand" to="/">Brand</Link>
                 </div>
 
                 <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul className="nav navbar-nav">
-                    <li className="active"><a href="/">Link <span className="sr-only">(current)</span></a></li>
-                    <li><a href="/">Link</a></li>
+                    <li className="active"><Link to="/">Link <span className="sr-only">(current)</span></Link></li>
+                    <li><Link to="/">Link</Link></li>
                   </ul>
                   <ul className="nav navbar-nav navbar-right">
                     {this.renderContent()}
