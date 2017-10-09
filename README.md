@@ -29,6 +29,12 @@ sendGridTemplateId=----------------
 ## Milestones 
  1. [ ] Setup a basic server.
 
+## Guidelines
+ 1. First make an issue and then start working on it.
+ 2. Always make a separate branch in following format name:feature. Eg: aditya#add-bootstrap. (Words are separated by -)
+ 3. In the commit message do mention the issue no. Eg: fixes #1
+ 4. Use proper code formatting. We use [CodeFormatter Sublime Plugin](https://github.com/akalongman/sublimetext-codeformatter)
+
 Note - 
 1. Heroku Cli is used for handling **environment variables** and deploys.
 2. To get **googleClientID** and **googleClientSecret** make a new project at [here](https://console.developers.google.com) and enable the Google+ api.
