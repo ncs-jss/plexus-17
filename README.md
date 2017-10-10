@@ -31,7 +31,7 @@ sendGridTemplateId=----------------
 
 ## Guidelines
  1. First make an issue and then start working on it.
- 2. Always make a separate branch in following format name:feature. Eg: aditya#add-bootstrap. (Words are separated by -).
+ 2. Always make a separate branch in following format name#feature. Eg: aditya#add-bootstrap. (Words are separated by -).
  3. In the commit message do mention the issue no. Eg: fixes #1.
  4. Use proper code formatting. We use [CodeFormatter Sublime Plugin](https://github.com/akalongman/sublimetext-codeformatter).
  5. Do mention if `npm install` is needed after merging the commit.
