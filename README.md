@@ -10,7 +10,7 @@
    1. Run `cd client ` in separate terminal to change into client directory.
    2. In client directory run `npm i` to install client-side dependencies.
    3. In client directory run `touch .env`.
-   4. In client directory run `npm start `.
+   4. In client directory run `npm start`.
    5. Navigate to localhost:3000 in the browser.
 
 ## Sample .env file
