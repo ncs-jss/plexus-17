@@ -8,12 +8,14 @@ const MediaSchema = require('./schema/Media');
 const UserSchema = new Schema({
   name: {
     type: String,
-    trim: true
+    trim: true,
+    required: true
   },
   username: {
     type: String,
     trim: true,
-    lowercase: true
+    lowercase: true,
+    required: true
   },
   avatar: MediaSchema,
   email: {
@@ -28,7 +30,7 @@ const UserSchema = new Schema({
     type: String,
     trim: true
   },
-  admissionNo: {
+  admNo: {
     type: String,
     trim: true
   },

@@ -9,28 +9,34 @@ const WinnerSchema = require('./schema/Winner');
 const EventSchema = new Schema({
   name: {
     type: String,
-    trim: true
+    trim: true,
+    required: true
   },
   description: {
     type: String,
-    trim: true
+    trim: true,
+    required: true
   },
   enquiry: {
-    type: String
+    type: String,
+    required: true
   },
   rules: [{
     type: String,
     trim: true
   }],
   startTime: {
-    type: Date
+    type: Date,
+    required: true
   },
   endTime: {
-    type: Date
+    type: Date,
+    required: true
   },
   state: {
     type: 'String',
-    enum: ['running', 'ended', 'toStart', 'blocked']
+    enum: ['running', 'ended', 'toStart', 'blocked'],
+    required: true
   },
   eventPrefs: [{
     type: String,
@@ -38,7 +44,8 @@ const EventSchema = new Schema({
   }],
   createdBy: {
     type: 'String',
-    enum: ['individual', 'society']
+    enum: ['individual', 'society'],
+    required: true
   },
   winners: [WinnerSchema],
   media: [MediaSchema],
@@ -47,8 +54,17 @@ const EventSchema = new Schema({
   },
   _editors: [{
     type: Schema.ObjectId,
-    ref: 'User'
-  }]
+    ref: 'User',
+    required: true
+  }],
+  verified: {
+    type: Boolean,
+    default: false
+  },
+  flag: {
+    type: Boolean,
+    default: false
+  }
 }, {
     timestamps: true
 })
