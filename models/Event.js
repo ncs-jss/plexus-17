@@ -32,14 +32,10 @@ const EventSchema = new Schema({
     type: 'String',
     enum: ['running', 'ended', 'toStart', 'blocked']
   },
-  needToken: {
-    type: Boolean,
-    default: False
-  },
-  needLeaderboard: {
-    type: Boolean,
-    default: True
-  },
+  eventPrefs: [{
+    type: String,
+    enum: ['leaderboard', 'variableWeightage', 'skippable']
+  }],
   createdBy: {
     type: 'String',
     enum: ['individual', 'society']
