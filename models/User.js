@@ -32,10 +32,6 @@ const UserSchema = new Schema({
     type: String,
     trim: true
   },
-  googleId: {
-    type: String,
-    trim: true
-  },
   token: {
     type: String,
     trim: true,
@@ -66,5 +62,7 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false
   }
+}, {
+    timestamps: true
 });
 module.exports = mongoose.model('User', UserSchema);
