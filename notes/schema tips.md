@@ -20,7 +20,7 @@ Difference between model, schema and simple nesting.
    **In short good for many-to-many, many-to-one and one-to-one relations which doesn't fit the first two scenarios**
 
 
-##Guidelines - 
+## Guidelines - 
 
    1. Whenever a field is associated with two models, prefix it with _ .
        

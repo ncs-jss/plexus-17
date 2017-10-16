@@ -2,10 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
-var morgan = require('morgan');
+const morgan = require('morgan');
 const passport = require('passport');
+
 require('./services/passport');
 const config = require('./config');
+
 mongoose.connect(config.mongoURI);
 const app = express();
 app.use(morgan('dev'));
@@ -19,7 +21,9 @@ app.use(cookieSession({
 }))
 app.use(passport.initialize());
 app.use(passport.session());
+
 require('./routes/authRoutes')(app);
+
 if (config.NODE_ENV === 'production') {
   const path = require('path');
   app.use(express.static('client/build'));
@@ -33,6 +37,7 @@ if (config.NODE_ENV === 'production') {
     });
   });
 }
+
 app.listen(config.port, () => {
   console.log(`app listening on port ${config.port}`);
 });

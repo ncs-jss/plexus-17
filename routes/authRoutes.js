@@ -1,4 +1,5 @@
 const passport = require('passport');
+
 module.exports = (app) => {
     app.get('/api/me', (req, res) => {
         res.send(req.user);
