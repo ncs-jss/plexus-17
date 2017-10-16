@@ -1,53 +1,70 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const {
+  Schema
+} = mongoose;
+
+const MediaSchema = require('./schema/Media');
+
 const UserSchema = new Schema({
-    name: {
-      type: String,
-      trim: true
-    },
-    username: {
-      type: String,
-      trim: true
-    },
-    email: {
-      type: String,
-      trim: true
-    },
-    phoneNo: {
-      type: String,
-      trim: true
-    },
-    googleId: {
-      type: String,
-      trim: true
-    },
-    admissionNo: {
-      type: String,
-      trim: true
-    },
-    googleId: {
-      type: String,
-      trim: true
-    },
-    role: {
-      type: String,
-      enum: ['admin', 'manager', 'editor', 'user'],
-      default: 'user'
-    },
-    _society: {
-      type: Schema.Types.ObjectID
-    }
-    type: {
-      type: String,
-      enum: ['individual', 'societyMember', 'societyExec']
-    },
-    verified: {
-      type: Boolean,
-      default: false
-    },
-    flag: {
-      type: Boolean,
-      default: false
-    }
+  name: {
+    type: String,
+    trim: true
+  },
+  username: {
+    type: String,
+    trim: true,
+    lowercase: true
+  },
+  avatar: MediaSchema,
+  email: {
+    type: String,
+    trim: true
+  },
+  phoneNo: {
+    type: String,
+    trim: true
+  },
+  googleId: {
+    type: String,
+    trim: true
+  },
+  admissionNo: {
+    type: String,
+    trim: true
+  },
+  googleId: {
+    type: String,
+    trim: true
+  },
+  token: {
+    type: String,
+    trim: true,
+    default: ""
+  },
+  role: {
+    type: String,
+    enum: ['admin', 'manager', 'editor', 'user'],
+    default: 'user'
+  },
+  type: {
+    type: String,
+    enum: ['individual', 'societyMember', 'societyExec']
+  },
+  _society: {
+    type: Schema.ObjectId,
+    ref: 'Society'
+  },
+  _arena: [{
+    type: Schema.ObjectId,
+    ref: 'Arena'
+  }],
+  verified: {
+    type: Boolean,
+    default: false
+  },
+  flag: {
+    type: Boolean,
+    default: false
+  }
 });
 module.exports = mongoose.model('User', UserSchema);

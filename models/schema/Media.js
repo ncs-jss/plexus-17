@@ -6,9 +6,10 @@ const {
 const MediaSchema = new Schema({
   type: {
     type: String,
-    enum: ['img', 'yt', 'other']
+    enum: ['img', 'yt', 'file', 'other'],
+    default: 'img'
   },
-  mediaUrl: {
+  url: {
     type: String,
     trim: true
   }
