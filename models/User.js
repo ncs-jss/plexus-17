@@ -14,13 +14,13 @@ const UserSchema = new Schema({
   username: {
     type: String,
     trim: true,
-    lowercase: true,
-    required: true
+    lowercase: true
   },
   avatar: MediaSchema,
   email: {
     type: String,
-    trim: true
+    trim: true,
+    required: true
   },
   phoneNo: {
     type: String,
