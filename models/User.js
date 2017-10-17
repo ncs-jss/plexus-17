@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const {
   Schema
 } = mongoose;
+const { ObjectId } = Schema;
 
 const MediaSchema = require('./schema/Media');
 
@@ -49,11 +50,11 @@ const UserSchema = new Schema({
     enum: ['individual', 'societyMember', 'societyExec']
   },
   _society: {
-    type: Schema.ObjectId,
+    type: ObjectId,
     ref: 'Society'
   },
   _arena: [{
-    type: Schema.ObjectId,
+    type: ObjectId,
     ref: 'Arena'
   }],
   verified: {

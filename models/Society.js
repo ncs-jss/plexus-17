@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const {
   Schema
 } = mongoose;
+const { ObjectId } = Schema;
 
 const MediaSchema = require('./schema/Media');
 
@@ -17,11 +18,11 @@ const SocietySchema = new Schema({
   logoUrl: MediaSchema,
   coverUrl: MediaSchema,
   _members: [{
-    type: Schema.ObjectId,
+    type: ObjectId,
     ref: 'User'
   }],
   _execs: [{
-    type: Schema.ObjectId,
+    type: ObjectId,
     ref: 'User'
   }],
   verified: {
