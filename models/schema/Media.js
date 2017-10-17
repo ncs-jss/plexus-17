@@ -13,6 +13,6 @@ const MediaSchema = new Schema({
     type: String,
     trim: true
   }
-})
+});
 
 module.exports = MediaSchema;

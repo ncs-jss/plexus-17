@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 const {
   Schema
 } = mongoose;
+
 const MediaSchema = require('./schema/Media');
+
 const ArenaSchema = new Schema({
   _event: {
     type: Schema.ObjectId,
@@ -46,5 +48,6 @@ const ArenaSchema = new Schema({
     type: Boolean,
     default: false
   }
-})
+});
+
 module.exports = mongoose.model('Arena', ArenaSchema);

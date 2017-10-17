@@ -33,7 +33,7 @@ const SocietySchema = new Schema({
     default: false
   }
 }, {
-    timestamps: true
-})
+  timestamps: true
+});
 
 module.exports = mongoose.model('Society', SocietySchema);

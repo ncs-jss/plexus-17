@@ -4,26 +4,33 @@ const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const passport = require('passport');
+const compression = require('compression');
 
 require('./services/passport');
 const config = require('./config');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.mongoURI);
+
 const app = express();
+
+app.use(compression());
 app.use(morgan('dev'));
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
+
 app.use(cookieSession({
   maxAge: 30 * 24 * 60 * 60 * 1000,
   keys: [config.cookieKey]
 }))
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes/authRoutes')(app);
+require('./routes')(app);
 
 if (config.NODE_ENV === 'production') {
   const path = require('path');

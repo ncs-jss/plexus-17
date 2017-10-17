@@ -12,6 +12,6 @@ const WinnerSchema = new Schema({
     type: Number,
     default: 1
   }
-})
+});
 
 module.exports = WinnerSchema;
