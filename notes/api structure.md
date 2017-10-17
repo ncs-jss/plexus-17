@@ -14,13 +14,13 @@
         
       Note that here we have to use the plural.
 
-   * Cases where another type of routes will be used - 
+  * Cases where another type of routes will be used - 
 
-       - GET /{entity}/:name         (Eg:- GET /events/errata-18)
+        - GET /{entity}/:name         (Eg:- GET /events/errata-18)
 
       To handle this, we have to make sure that our mongoose query has an OR operation which fetches either by name or by id.
 
-   * As exposing the mongodb id for an entity to end users would be incorrect, we will use some other identifier.  
+  * As exposing the mongodb id for an entity to end users would be incorrect, we will use some other identifier.  
 
        Eg:- When details of particular event will be displayed, some identifier must be shown in the address bar (so that a user can share the event on social media). Here obviously we won't show the event mongo id, instead we will use the *slug* module to make a unique identifier for an event through the event's name.
 
