@@ -8,6 +8,7 @@ const passport = require('passport');
 require('./services/passport');
 const config = require('./config');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(config.mongoURI);
 const app = express();
 app.use(morgan('dev'));
