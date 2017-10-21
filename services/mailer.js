@@ -5,14 +5,14 @@ sgMail.setApiKey(config.sendGridApiKey);
 
 module.exports = (surveyData, surveyId) => {
   const recipients = surveyData.recipients.split(',').map(email => email.trim());
-  const personalizations = surveyData.recipients.split(",").map(email => {
+  const personalizations = surveyData.recipients.split(',').map(email => {
     email = email.trim();
     return {
       to: email,
       substitutions: {
         email: email
       }
-    }
+    };
   });
   const msg = {
     personalizations,
@@ -27,4 +27,4 @@ module.exports = (surveyData, surveyId) => {
     }
   };
   return sgMail.sendMultiple(msg);
-}
+};

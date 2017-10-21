@@ -11,7 +11,8 @@
     "start": "heroku local dev",
     "client": "npm start --prefix client",
     "heroku-postbuild": "(npm install --prefix client) && (npm run build --prefix client)",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format":"./node_modules/.bin/prettier --config ./.prettierrc --write \"**/*.js\""
   },
   "keywords": [],
   "author": "Aditya Agarwal <adityaa803@gmail.com> (http://adi.surge.sh/)",
@@ -29,6 +30,7 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "path-parser": "^2.0.2",
+    "prettier": "^1.7.4",
     "slug": "^0.9.1"
   }
 }
