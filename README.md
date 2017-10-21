@@ -46,3 +46,4 @@ Note -
 1. Heroku Cli is used for handling **environment variables** and deploys.
 2. To get **googleClientID** and **googleClientSecret** make a new project at [here](https://console.developers.google.com) and enable the Google+ api.
 3. If you don't have **mongodb** locally, then create a remote db [here](https://mlab.com/home) or you can download it from [here](https://www.mongodb.com/download-center?jmp=docs&_ga=2.47151591.1318332256.1507577170-1071278786.1507217039#community)
+4. Whenever you commit the code. Prettier runs and it formats the code. If any changes are made then do stage again and commit.
