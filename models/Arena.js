@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-const {
-  Schema
-} = mongoose;
+const { Schema } = mongoose;
 const { ObjectId } = Schema;
 
 const MediaSchema = require('./schema/Media');
@@ -24,26 +22,28 @@ const ArenaSchema = new Schema({
     ref: 'User'
   },
   questions: {
-    data: [{
-      _question: {
-        type: ObjectId,
-        ref: 'Question'
-      },
-      state: {
-        type: String,
-        enum: ['correct', 'incorrect', 'unattempted']
-      },
-      givenAns: {
-        type: String
+    data: [
+      {
+        _question: {
+          type: ObjectId,
+          ref: 'Question'
+        },
+        state: {
+          type: String,
+          enum: ['correct', 'incorrect', 'unattempted']
+        },
+        givenAns: {
+          type: String
+        }
       }
-    }],
+    ],
     questionIndex: {
       type: Number,
       default: 0
     },
     submittedTime: {
       type: Date
-    },
+    }
   },
   flag: {
     type: Boolean,

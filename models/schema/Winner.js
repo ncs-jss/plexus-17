@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-const {
-  Schema
-} = mongoose;
+const { Schema } = mongoose;
 
 const WinnerSchema = new Schema({
   _user: {
