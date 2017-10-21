@@ -1,3 +1,9 @@
+## Description
+
+Plexus aims to be a one stop solution for all kinds of digital events like Quizes. It specially targets the yearly online events happening in our college. This platform will allow other societies to host their events without any friction or technical know-how.
+
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
 ## To Start Local Server -
  A. Setting Up the server -
    1. Install heroku-cli with `npm i -g heroku-cli`.
