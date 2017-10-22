@@ -12,7 +12,7 @@
     "client": "npm start --prefix client",
     "heroku-postbuild": "(npm install --prefix client) && (npm run build --prefix client)",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "./node_modules/.bin/prettier --config ./.prettierrc --write \"**/*.js\"",
+    "format": "prettier --write \"**/*.js\"",
     "precommit": "npm run format"
   },
   "keywords": [],
