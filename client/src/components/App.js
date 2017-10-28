@@ -10,7 +10,7 @@ import '../common/css/base.css';
 
 import Header from './Header';
 import Landing from './Landing';
-import Dashboard from './Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 
 class App extends Component {
   componentDidMount() {

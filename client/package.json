@@ -19,7 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postbuild": "postcss --use postcss-custom-properties --replace build/**/*.css"
   },
   "proxy": {
     "/auth/google": {
@@ -28,5 +29,9 @@
     "/api/*": {
       "target": "http://localhost:5000"
     }
+  },
+  "devDependencies": {
+    "postcss-cli": "^4.1.1",
+    "postcss-custom-properties": "^6.2.0"
   }
 }
