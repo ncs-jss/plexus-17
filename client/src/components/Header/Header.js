@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import styles from './Header.css';
 import Logo from './Logo/Logo';
@@ -25,7 +25,6 @@ class Header extends Component {
   }
 
   renderAuthButton() {
-    console.log(this.props);
     switch (this.props.auth) {
       case null:
         return;
@@ -49,10 +48,10 @@ class Header extends Component {
   }
 
   renderNavLinks() {
-    return this.navLinks.map(({ text, url }) => {
+    return this.navLinks.map(({ text, url }, index) => {
       return (
-        <li key={url}>
-          <Link to={url}>{text}</Link>
+        <li key={index}>
+          <NavLink to={url}>{text}</NavLink>
         </li>
       );
     });
