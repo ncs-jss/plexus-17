@@ -51,7 +51,7 @@ class Header extends Component {
   renderNavLinks() {
     return this.navLinks.map(({ text, url }) => {
       return (
-        <li>
+        <li key={url}>
           <Link to={url}>{text}</Link>
         </li>
       );
