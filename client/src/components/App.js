@@ -11,20 +11,23 @@ import '../common/css/base.css';
 import Header from './Header/Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard/Dashboard';
+import Event from './Event/Event';
 
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
   }
+
   render() {
     return (
       <div>
         <BrowserRouter>
           <div>
-            <Header />
+            <Route path="/" component={Header} />
             <div className="container">
               <Route exact path="/" component={Landing} />
-              <Route exact path="/dashboard" component={Dashboard} />
+              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/events" component={Event} />
             </div>
           </div>
         </BrowserRouter>
