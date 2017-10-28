@@ -8,7 +8,7 @@ import * as actions from '../actions';
 
 import '../common/css/base.css';
 
-import Header from './Header';
+import Header from './Header/Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard/Dashboard';
 

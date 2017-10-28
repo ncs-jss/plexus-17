@@ -1,7 +1,8 @@
-@import './button.css';
 @import './theme.css';
+@import './button.css';
+@import './link.css';
 
 body {
   background: var(--main-color);
-  color: #fff;
+  color: var(--default-color);
 }

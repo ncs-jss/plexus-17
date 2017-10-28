@@ -1,0 +1,8 @@
+a, a:hover, a:focus {
+  color: var(--default-color);
+  background: transparent !important;
+}
+
+a {
+  color: #ddd;
+}

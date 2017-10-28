@@ -1,28 +1,34 @@
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active,.btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  outline-color: var(--accent-color);
+}
+
 .btn-primary {
   color: var(--main-color);
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
-  background-color: var(--accent-color);
+.btn-outline-primary, .btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary.active {
+  color: var(--main-color);
+  background-color: var(--accent-color) !important;
   border-color: var(--accent-color);
-  outline-color: var(--accent-color);
-}
-
-.btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover {
-  background-color: var(--accent-color);
-  border-color: var(--accent-color);
-  outline-color: var(--accent-color);
 }
 
 .btn-outline-primary {
   color: var(--accent-color);
-  background-color: transparent;
+  background-color: transparent !important;
   background-image: none;
+}
+
+.btn-outline-default, .btn-outline-default:hover, .btn-outline-default:active, .btn-outline-default.active {
+  color: var(--main-color);
+  background-color: var(--accent-color) !important;
   border-color: var(--accent-color);
 }
 
-.btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary.active {
-  color: var(--main-color);
-  background-color: var(--accent-color);
-  border-color: var(--accent-color);
+.btn-outline-default {
+  color: var(--default-color);
+  background-color: transparent !important;
+  background-image: none;
+  border-color: var(--default-color);
 }

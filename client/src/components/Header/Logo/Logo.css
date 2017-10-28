@@ -1,0 +1,8 @@
+:local(.logo) {
+  font-size: 45px;
+  color: var(--accent-color);
+}
+
+:local(.event) {
+  font-size: 20px;
+}

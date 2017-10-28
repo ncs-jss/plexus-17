@@ -7,7 +7,7 @@ class Dashboard extends Component {
     return (
       <div className={styles.wrapper}>
         <div>Dashboard</div>
-        <button className={`${styles.button} btn btn-primary`}>Button</button>
+        <button className={`${styles.btn} btn btn-primary`}>Button</button>
       </div>
     );
   }

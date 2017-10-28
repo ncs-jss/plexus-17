@@ -3,6 +3,6 @@
   color: #fff;
 }
 
-:local(.button:hover) {
+:local(.btn:hover) {
   background-color: var(--main-color);
 }
