@@ -1,0 +1,8 @@
+:local(.wrapper) {
+  font-size: 30px;
+  color: #fff;
+}
+
+:local(.button:hover) {
+  background-color: var(--main-color);
+}

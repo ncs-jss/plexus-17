@@ -1,5 +1,7 @@
 @import './button.css';
+@import './theme.css';
+
 body {
-  background: #344151;
+  background: var(--main-color);
   color: #fff;
 }
