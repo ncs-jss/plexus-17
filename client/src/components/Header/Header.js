@@ -6,19 +6,22 @@ import styles from './Header.css';
 import Logo from './Logo/Logo';
 
 class Header extends Component {
-
   constructor(props) {
     super(props);
-    this.navLinks = [{
-      text: 'Home',
-      url: '/home'
-    }, {
-      text: 'Events',
-      url: '/events'
-    }, {
-      text: 'Leaderboard',
-      url: '/leaderboard'
-    }]
+    this.navLinks = [
+      {
+        text: 'Home',
+        url: '/home'
+      },
+      {
+        text: 'Events',
+        url: '/events'
+      },
+      {
+        text: 'Leaderboard',
+        url: '/leaderboard'
+      }
+    ];
   }
 
   renderAuthButton() {
@@ -46,17 +49,13 @@ class Header extends Component {
   }
 
   renderNavLinks() {
-    return (
-      this.navLinks.map(({text, url}) => {
-        return (
-          <li>
-            <Link to={url}>
-              {text}
-            </Link>
-          </li>
-        );
-      })
-    );
+    return this.navLinks.map(({ text, url }) => {
+      return (
+        <li>
+          <Link to={url}>{text}</Link>
+        </li>
+      );
+    });
   }
 
   render() {
@@ -77,7 +76,7 @@ class Header extends Component {
               <span className="icon-bar" />
             </button>
             <Link className="navbar-brand" to="/">
-              <Logo/>
+              <Logo />
             </Link>
           </div>
 
