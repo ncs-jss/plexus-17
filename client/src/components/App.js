@@ -14,11 +14,10 @@ import Dashboard from './Dashboard/Dashboard';
 import Event from './Event/Event';
 
 class App extends Component {
-
   componentDidMount() {
     this.props.fetchUser();
   }
-  
+
   render() {
     return (
       <div>
