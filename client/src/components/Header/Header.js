@@ -2,8 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import styles from './Header.css';
+import Logo from './Logo/Logo';
+
 class Header extends Component {
-  renderContent() {
+
+  constructor(props) {
+    super(props);
+    this.navLinks = [{
+      text: 'Home',
+      url: '/home'
+    }, {
+      text: 'Events',
+      url: '/events'
+    }, {
+      text: 'Leaderboard',
+      url: '/leaderboard'
+    }]
+  }
+
+  renderAuthButton() {
     console.log(this.props);
     switch (this.props.auth) {
       case null:
@@ -11,30 +29,46 @@ class Header extends Component {
       case false:
         return (
           <li>
-            <a href="/auth/google"> Login With Google </a>
+            <a className={`${styles.btn} btn btn-outline-default`} href="/auth/google">
+              Login With Google
+            </a>
           </li>
         );
       default:
-        return [
+        return (
           <li key="3">
-            <a className="btn pink" href="/api/logout">
-              {' '}
-              Log Out{' '}
+            <a className={`${styles.btn} btn btn-outline-default`} href="/api/logout">
+              Log Out
             </a>
           </li>
-        ];
+        );
     }
   }
+
+  renderNavLinks() {
+    return (
+      this.navLinks.map(({text, url}) => {
+        return (
+          <li>
+            <Link to={url}>
+              {text}
+            </Link>
+          </li>
+        );
+      })
+    );
+  }
+
   render() {
     return (
-      <nav className="navbar">
+      <nav className={`${styles.navbar} navbar`}>
         <div className="container-fluid">
           <div className="navbar-header">
             <button
               type="button"
               className="navbar-toggle collapsed"
               data-toggle="collapse"
-              data-target="#bs-example-navbar-collapse-1"
+              data-target="#navbar-collapse"
               aria-expanded="false"
             >
               <span className="sr-only">Toggle navigation</span>
@@ -43,22 +77,15 @@ class Header extends Component {
               <span className="icon-bar" />
             </button>
             <Link className="navbar-brand" to="/">
-              Brand
+              <Logo/>
             </Link>
           </div>
 
-          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul className="nav navbar-nav">
-              <li className="active">
-                <Link to="/">
-                  Link <span className="sr-only">(current)</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/">Link</Link>
-              </li>
+          <div className="collapse navbar-collapse" id="navbar-collapse">
+            <ul className={`${styles.navbarRight} nav navbar-nav navbar-right`}>
+              {this.renderNavLinks()}
+              {this.renderAuthButton()}
             </ul>
-            <ul className="nav navbar-nav navbar-right">{this.renderContent()}</ul>
           </div>
         </div>
       </nav>
