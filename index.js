@@ -10,7 +10,7 @@ require('./services/passport');
 const config = require('./config');
 
 mongoose.Promise = global.Promise;
-mongoose.connect(config.mongoURI);
+mongoose.connect(config.mongoURI, { useMongoClient: true });
 
 const app = express();
 

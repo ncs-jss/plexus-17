@@ -26,7 +26,7 @@ const UserSchema = new Schema(
       type: String,
       trim: true
     },
-    googleId: {
+    authId: {
       type: String,
       trim: true
     },
@@ -72,4 +72,16 @@ const UserSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model('User', UserSchema);
+const User = module.exports = mongoose.model('User', UserSchema);
+
+module.exports.addUser = (profile, callback) => {
+  return new User({
+    authId: profile.id,
+    name: profile.displayName,
+    email: profile.emails[0].value,
+    avatar: {
+      url: profile.photos[0].value
+    }
+  }).save();
+}
+

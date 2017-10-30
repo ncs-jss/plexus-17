@@ -29,6 +29,7 @@
     "mongoose": "^4.11.10",
     "morgan": "^1.8.2",
     "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
     "path-parser": "^2.0.2",
     "prettier": "^1.7.4",

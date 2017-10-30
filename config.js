@@ -7,5 +7,7 @@ module.exports = {
   cookieKey: process.env.cookieKey,
   sendGridApiKey: process.env.sendGridApiKey,
   sendGridTemplateId: process.env.sendGridTemplateId,
-  hostName: process.env.HOST_URL
+  hostName: process.env.HOST_URL,
+  facebookAppId: process.env.facebookAppId,
+  facebookAppSecret: process.env.facebookAppSecret
 };
