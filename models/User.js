@@ -27,7 +27,7 @@ const UserSchema = new Schema(
       trim: true
     },
     authId: {
-      type: String,
+      type: Array,
       trim: true
     },
     admNo: {
