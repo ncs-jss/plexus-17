@@ -1,7 +1,7 @@
 const User = require('../models/User');
 
 module.exports = {
-  addUser: async function (service, accessToken, refreshToken, profile, done) {
+  addUser: async function(service, accessToken, refreshToken, profile, done) {
     const authId = {};
     authId[service] = profile.id;
     const existingUser = await User.findOne({ authId });
@@ -11,4 +11,4 @@ module.exports = {
     const user = await User.addUser(service, profile);
     return done(null, user);
   }
-}
+};

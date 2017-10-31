@@ -1,84 +1,84 @@
 const mongoose = require('mongoose');
-const {
-  Schema
-} = mongoose;
-const {
-  ObjectId
-} = Schema;
+const { Schema } = mongoose;
+const { ObjectId } = Schema;
 
 const MediaSchema = require('./schema/Media');
 
-const UserSchema = new Schema({
-  name: {
-    type: String,
-    trim: true,
-    required: true
-  },
-  username: {
-    type: String,
-    trim: true,
-    lowercase: true
-  },
-  avatar: MediaSchema,
-  email: {
-    type: String,
-    trim: true,
-    required: true
-  },
-  phoneNo: {
-    type: String,
-    trim: true
-  },
-  authId: {
-    google: {
+const UserSchema = new Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true
+    },
+    username: {
+      type: String,
+      trim: true,
+      lowercase: true
+    },
+    avatar: MediaSchema,
+    email: {
+      type: String,
+      trim: true,
+      required: true
+    },
+    phoneNo: {
       type: String,
       trim: true
     },
-    facebook: {
+    authId: {
+      google: {
+        type: String,
+        trim: true
+      },
+      facebook: {
+        type: String,
+        trim: true
+      }
+    },
+    admNo: {
       type: String,
       trim: true
+    },
+    token: {
+      type: String,
+      trim: true,
+      default: ''
+    },
+    role: {
+      type: String,
+      enum: ['admin', 'manager', 'editor', 'user'],
+      default: 'user'
+    },
+    type: {
+      type: String,
+      enum: ['individual', 'societyMember', 'societyExec']
+    },
+    _society: {
+      type: ObjectId,
+      ref: 'Society'
+    },
+    _arena: [
+      {
+        type: ObjectId,
+        ref: 'Arena'
+      }
+    ],
+    verified: {
+      type: Boolean,
+      default: false
+    },
+    flag: {
+      type: Boolean,
+      default: false
     }
   },
-  admNo: {
-    type: String,
-    trim: true
-  },
-  token: {
-    type: String,
-    trim: true,
-    default: ''
-  },
-  role: {
-    type: String,
-    enum: ['admin', 'manager', 'editor', 'user'],
-    default: 'user'
-  },
-  type: {
-    type: String,
-    enum: ['individual', 'societyMember', 'societyExec']
-  },
-  _society: {
-    type: ObjectId,
-    ref: 'Society'
-  },
-  _arena: [{
-    type: ObjectId,
-    ref: 'Arena'
-  }],
-  verified: {
-    type: Boolean,
-    default: false
-  },
-  flag: {
-    type: Boolean,
-    default: false
+  {
+    timestamps: true
   }
-}, {
-  timestamps: true
-});
+);
 
-
-UserSchema.statics.addUser = function addUser (service, profile, callback) {
+UserSchema.statics.addUser = function addUser(service, profile, callback) {
   const authId = {};
   authId[service] = profile.id;
   return new User({
@@ -89,7 +89,7 @@ UserSchema.statics.addUser = function addUser (service, profile, callback) {
       url: profile.photos[0].value
     }
   }).save();
-}
+};
 
 const User = mongoose.model('User', UserSchema);
 
