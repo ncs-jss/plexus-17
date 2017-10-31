@@ -9,14 +9,18 @@ module.exports = app => {
   app.get('/auth/:service', (req, res, next) => {
 
     switch (req.params.service) {
-
-      case 'google': passport.authenticate('google', {
-          scope: ['profile', 'email']
-        })(req,res,next);
-        break;
-      case 'facebook': passport.authenticate('facebook', { scope: ['email', 'user_about_me', 'user_photos'] })(req,res,next);
-        break;
-      default: next();
+    case 'google':
+      passport.authenticate('google', {
+        scope: ['profile', 'email']
+      })(req, res, next);
+      break;
+    case 'facebook':
+      passport.authenticate('facebook', {
+        scope: ['email', 'user_about_me', 'user_photos']
+      })(req, res, next);
+      break;
+    default:
+      next();
     }
   });
 
