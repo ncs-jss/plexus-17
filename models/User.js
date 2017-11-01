@@ -26,9 +26,15 @@ const UserSchema = new Schema(
       type: String,
       trim: true
     },
-    googleId: {
-      type: String,
-      trim: true
+    authId: {
+      google: {
+        type: String,
+        trim: true
+      },
+      facebook: {
+        type: String,
+        trim: true
+      }
     },
     admNo: {
       type: String,
@@ -72,4 +78,19 @@ const UserSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model('User', UserSchema);
+UserSchema.statics.addUser = function addUser(service, profile, callback) {
+  const authId = {};
+  authId[service] = profile.id;
+  return new User({
+    authId,
+    name: profile.displayName,
+    email: profile.emails[0].value,
+    avatar: {
+      url: profile.photos[0].value
+    }
+  }).save();
+};
+
+const User = mongoose.model('User', UserSchema);
+
+module.exports = User;
