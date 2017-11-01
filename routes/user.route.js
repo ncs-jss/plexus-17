@@ -2,11 +2,11 @@ const { joiValidate } = require('express-joi');
 
 const User = require('../models/User');
 const userValidator = require('../models/validations/user');
-const requireLogin = require('../middlewares/requireLogin');
-const requireAdminLogin = require('../middlewares/requireAdminLogin');
+const { isLogin, isAdmin } = require('../middlewares/roleManager.mw');
+
 
 module.exports = app => {
-  app.get('/api/users', requireAdminLogin, joiValidate(userValidator.getList), async (req, res) => {
+  app.get('/api/users', isAdmin, joiValidate(userValidator.getList), async (req, res) => {
     let { limit, skip, fields } = req.items;
     limit = parseInt(limit);
     skip = parseInt(skip);
@@ -15,7 +15,7 @@ module.exports = app => {
       .skip(skip);
     res.send(users);
   });
-  app.get('/api/users/:id', requireLogin, joiValidate(userValidator.get), async (req, res) => {
+  app.get('/api/users/:id', isLogin, joiValidate(userValidator.get), async (req, res) => {
     let { id } = req.items;
     const user = await User.findById(id);
     if (user.role === 'admin' && req.user.role !== 'admin') {

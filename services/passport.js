@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const config = require('../config');
 const User = require('../models/User');
-const { addUser } = require('./userService.js');
+const { addUser } = require('./user.service.js');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);

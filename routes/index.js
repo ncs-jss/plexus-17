@@ -1,4 +1,4 @@
 module.exports = app => {
-  require('./authRoutes')(app);
-  require('./userRoutes')(app);
+  require('./auth.route')(app);
+  require('./user.route')(app);
 };
