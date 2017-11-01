@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import styles from './Logo.css';
+import logo from '../../../common/images/logo.png';
 
 class Logo extends Component {
   componentDidMount() {}
@@ -41,7 +42,7 @@ class Logo extends Component {
   render() {
     return (
       <div>
-        <span className={styles.logo}>Plexus </span>
+        <span className={styles.logo}><img className={styles.logoImage} src={logo} alt="Plexus" /> </span>
         {this.renderBreadCrumb()}
       </div>
     );
