@@ -10,7 +10,7 @@
 
 .btn-outline-primary, .btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary.active {
   color: var(--main-color);
-  background-color: var(--accent-color) !important;
+  background-color: var(--main-color) !important;
   border-color: var(--accent-color);
 }
 
@@ -22,8 +22,8 @@
 
 .btn-outline-default, .btn-outline-default:hover, .btn-outline-default:active, .btn-outline-default.active {
   color: var(--main-color);
-  background-color: var(--accent-color) !important;
-  border-color: var(--accent-color);
+  background-color: var(--default-color) !important;
+  border-color: var(--default-color);
 }
 
 .btn-outline-default {
@@ -31,4 +31,15 @@
   background-color: transparent !important;
   background-image: none;
   border-color: var(--default-color);
+}
+
+.btn-danger, .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active,.btn-danger.active.focus, .btn-danger.active:focus, .btn-danger.active:hover, .btn-danger:active.focus, .btn-danger:active:focus, .btn-danger:active:hover {
+  background-color: var(--error-color) !important;
+  border-color: var(--error-color);
+  outline-color: var(--error-color);
+  
+}
+
+.btn-danger {
+  color: var(--default-color);
 }
