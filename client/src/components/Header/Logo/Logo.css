@@ -1,8 +1,14 @@
 :local(.logo) {
   font-size: 45px;
   color: var(--accent-color);
+  padding-left: 20px;
 }
 
 :local(.event) {
   font-size: 20px;
+}
+
+:local(.logoImage) {
+  width: 200px;
+  height: auto;
 }
