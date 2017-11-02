@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
-
-import EventItem from './EventItem/EventItem';
+import { Route } from 'react-router-dom';
 
 class Event extends Component {
   render() {
     const { match } = this.props;
     return (
       <div>
-        <ul>
-          <li>
-            <Link to={`${match.url}/errata`}>Errata</Link>
-          </li>
-          <li>
-            <Link to={`${match.url}/sherlocked`}>Sherlocked</Link>
-          </li>
-          <li>
-            <Link to={`${match.url}/khoj`}>Khoj</Link>
-          </li>
-        </ul>
-        <Route path="/events" component={EventItem} />
+        <Route
+          path={`${match.path}/:name`}
+          render={({ match }) => (
+            <div>
+              <h3> {match.params.name} </h3>
+            </div>
+          )}
+        />
       </div>
     );
   }

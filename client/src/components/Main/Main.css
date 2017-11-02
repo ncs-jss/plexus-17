@@ -1,0 +1,22 @@
+:local(.wrapper) {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+
+:local(.container) {
+  height: 100%;
+}
+
+:local(.leftSidebarWrapper) {
+  height: 100%;
+  padding: 75px 0;
+}
+
+:local(.leftSidebar) {
+  border-right: 1px solid var(--accent-color);
+  height: 100%;
+  width: 100%;
+}

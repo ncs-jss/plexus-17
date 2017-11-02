@@ -10,7 +10,7 @@
 
 .btn-outline-primary, .btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary.active {
   color: var(--main-color);
-  background-color: var(--main-color) !important;
+  background-color: var(--accent-color) !important;
   border-color: var(--accent-color);
 }
 

@@ -9,9 +9,15 @@ import * as actions from '../actions';
 import '../common/css/base.css';
 
 import Header from './Header/Header';
-import Landing from './Landing';
-import Dashboard from './Dashboard/Dashboard';
-import Event from './Event/Event';
+import Main from './Main/Main';
+
+const styles = {
+  wrapper: {
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column'
+  }
+}
 
 class App extends Component {
   componentDidMount() {
@@ -22,12 +28,10 @@ class App extends Component {
     return (
       <div>
         <BrowserRouter>
-          <div>
-            <Route path="/" component={Header} />
-            <div className="container">
-              <Route exact path="/" component={Landing} />
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/events" component={Event} />
+          <div style={styles.wrapper}>
+            <Route path="/" component={Header}/>
+            <div className="container" style={{flex: 1}}>
+              <Route path="/" component={Main} />
             </div>
           </div>
         </BrowserRouter>
