@@ -1,12 +1,19 @@
 :local(.navbar) {
-  margin-top: 30px;
+  padding-top: 30px;
 }
 
-:local(.navbarRight) {
-  display: flex;
-  align-items: center;
+:local(.navbarBrand) {
+  height: 100%;  
 }
 
 :local(.btn) {
   padding: 6px 12px !important;
+}
+
+@media screen and (min-width: 768px) {
+  :local(.navbarRight) {
+    display: flex;
+    align-items: center;
+    height: 100px;
+  }
 }

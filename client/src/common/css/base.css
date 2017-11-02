@@ -1,8 +1,26 @@
 @import './theme.css';
 @import './button.css';
 @import './link.css';
+@import './navbar.css';
 
 body {
   background: var(--main-color);
   color: var(--default-color);
+}
+
+@media only screen and (min-width : 768px) {
+    .is-table-row {
+        display: table;
+    }
+    .is-table-row [class*="col-"] {
+        float: none;
+        display: table-cell;
+        vertical-align: top;
+    }
+    .row-eq-height {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display:         flex;
+    }
 }

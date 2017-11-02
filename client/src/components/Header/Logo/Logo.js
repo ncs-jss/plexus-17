@@ -19,7 +19,7 @@ class Logo extends Component {
                   <span> / </span>
                   <Route
                     exact
-                    path="/events"
+                    path="/"
                     render={props => {
                       return <span>Events</span>;
                     }}
@@ -27,7 +27,7 @@ class Logo extends Component {
                   <Route
                     path="/events/:name"
                     render={props => {
-                      return <span>{props.match.params.name}</span>;
+                      return <span style={{textTransform: 'capitalize', color: 'var(--default-color)'}}>{props.match.params.name}</span>;
                     }}
                   />
                 </span>

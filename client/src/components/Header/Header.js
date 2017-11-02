@@ -15,7 +15,7 @@ class Header extends Component {
       },
       {
         text: 'Events',
-        url: '/events'
+        url: '/'
       },
       {
         text: 'Leaderboard',
@@ -74,7 +74,7 @@ class Header extends Component {
               <span className="icon-bar" />
               <span className="icon-bar" />
             </button>
-            <Link className="navbar-brand" to="/">
+            <Link className={`${styles.navbarBrand} navbar-brand`} to="/">
               <Logo />
             </Link>
           </div>
