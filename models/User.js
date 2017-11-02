@@ -52,7 +52,8 @@ const UserSchema = new Schema(
     },
     type: {
       type: String,
-      enum: ['individual', 'societyMember', 'societyExec']
+      enum: ['individual', 'societyMember', 'societyExec'],
+      default: 'individual'
     },
     _society: {
       type: ObjectId,
@@ -89,6 +90,17 @@ UserSchema.statics.addUser = function addUser(service, profile, callback) {
       url: profile.photos[0].value
     }
   }).save();
+};
+
+UserSchema.methods.updateUser = function updateUser(user, data, callback) {
+  user.email = data.body.email.trim();
+  user.username = data.body.username.trim();
+  user.name = data.body.name.trim();
+  user.phoneNo = data.body.phoneNo.trim();
+  user.admNo = data.body.admNo.trim();
+
+  return user.save();
+
 };
 
 const User = mongoose.model('User', UserSchema);
