@@ -27,7 +27,11 @@ class Logo extends Component {
                   <Route
                     path="/events/:name"
                     render={props => {
-                      return <span style={{textTransform: 'capitalize', color: 'var(--default-color)'}}>{props.match.params.name}</span>;
+                      return (
+                        <span style={{ textTransform: 'capitalize', color: 'var(--default-color)' }}>
+                          {props.match.params.name}
+                        </span>
+                      );
                     }}
                   />
                 </span>
@@ -42,7 +46,9 @@ class Logo extends Component {
   render() {
     return (
       <div>
-        <span className={styles.logo}><img className={styles.logoImage} src={logo} alt="Plexus" /> </span>
+        <span className={styles.logo}>
+          <img className={styles.logoImage} src={logo} alt="Plexus" />{' '}
+        </span>
         {this.renderBreadCrumb()}
       </div>
     );

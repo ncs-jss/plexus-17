@@ -25,18 +25,14 @@ class Event extends Component {
 
   renderEventItems() {
     return this.eventLinks.map((event, index) => {
-      return (
-        <EventItem baseUrl={this.baseUrl} event={event} key={index}></EventItem>
-      );
+      return <EventItem baseUrl={this.baseUrl} event={event} key={index} />;
     });
   }
 
   render() {
     return (
       <div>
-        <div className='row'>
-          {this.renderEventItems()}
-        </div>
+        <div className="row">{this.renderEventItems()}</div>
       </div>
     );
   }

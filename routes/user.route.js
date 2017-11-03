@@ -4,7 +4,6 @@ const User = require('../models/User');
 const userValidator = require('../models/validations/user');
 const { isLogin, isAdmin } = require('../middlewares/roleManager.mw');
 
-
 module.exports = app => {
   app.get('/api/users', isAdmin, joiValidate(userValidator.getList), async (req, res) => {
     let { limit, skip, fields } = req.items;

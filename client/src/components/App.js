@@ -17,7 +17,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column'
   }
-}
+};
 
 class App extends Component {
   componentDidMount() {
@@ -29,8 +29,8 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div style={styles.wrapper}>
-            <Route path="/" component={Header}/>
-            <div className="container" style={{flex: 1}}>
+            <Route path="/" component={Header} />
+            <div className="container" style={{ flex: 1 }}>
               <Route path="/" component={Main} />
             </div>
           </div>
