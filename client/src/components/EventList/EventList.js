@@ -33,7 +33,7 @@ class Event extends Component {
 
   render() {
     return (
-      <div style={{paddingLeft: '20px'}}>
+      <div>
         <div className='row'>
           {this.renderEventItems()}
         </div>

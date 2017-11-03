@@ -14,7 +14,7 @@ class Main extends Component {
             <div className={styles.leftSidebar}>
             </div>
           </div>
-          <div className='col-sm-8'>
+          <div className={`${styles.rightSidebarWrapper} col-sm-8`}>
             <Route exact path="/" component={EventList} />
             <Route path="/events" component={Event} />
           </div>
