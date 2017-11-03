@@ -4,7 +4,6 @@ const User = require('../models/User');
 const userValidator = require('../models/validations/user');
 const { isLogin, isAdmin, isManager } = require('../middlewares/roleManager.mw');
 
-
 module.exports = app => {
 
   // User Routes

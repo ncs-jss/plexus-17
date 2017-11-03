@@ -11,10 +11,9 @@ class Main extends Component {
       <div className={styles.wrapper}>
         <div className={`${styles.container} container`}>
           <div className={`${styles.leftSidebarWrapper} col-sm-4`}>
-            <div className={styles.leftSidebar}>
-            </div>
+            <div className={styles.leftSidebar} />
           </div>
-          <div className='col-sm-8'>
+          <div className={`${styles.rightSidebarWrapper} col-sm-8`}>
             <Route exact path="/" component={EventList} />
             <Route path="/events" component={Event} />
           </div>

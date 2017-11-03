@@ -20,3 +20,10 @@
   height: 100%;
   width: 100%;
 }
+
+:local(.rightSidebarWrapper) {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-left: 50px;
+}
