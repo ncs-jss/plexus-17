@@ -93,14 +93,12 @@ UserSchema.statics.addUser = function addUser(service, profile, callback) {
 };
 
 UserSchema.methods.updateUser = function updateUser(user, data, callback) {
-  user.email = data.body.email.trim();
-  user.username = data.body.username.trim();
-  user.name = data.body.name.trim();
-  user.phoneNo = data.body.phoneNo.trim();
-  user.admNo = data.body.admNo.trim();
-
+  Object.entries(data.body).forEach(([key, value]) => {
+    if (key !== 'email') {
+      user[key] = value;
+    }
+  });
   return user.save();
-
 };
 
 const User = mongoose.model('User', UserSchema);
