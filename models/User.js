@@ -93,11 +93,17 @@ UserSchema.statics.addUser = function addUser(service, profile, callback) {
 };
 
 UserSchema.methods.updateUser = function updateUser(user, data, callback) {
-  Object.entries(data.body).forEach(([key, value]) => {
-    if (key !== 'email') {
-      user[key] = value;
-    }
-  });
+  user.name = data.body.name;
+  user.username = data.body.username;
+  user.phoneNo = data.body.phoneNo;
+  user.admNo = data.body.admNo;
+  if(data.user.role === 'admin') {
+    user.email = data.body.email || user.email;
+    user.flag = data.body.flag || user.flag;
+    user.verified = data.body.verified || user.verified;
+    user.role = data.body.role || user.role;
+    user.type = data.body.type || user.type;
+  }
   return user.save();
 };
 

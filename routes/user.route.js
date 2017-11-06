@@ -17,7 +17,7 @@ module.exports = app => {
     res.send(user);
   });
 
-  app.put('/api/users/:id', isLogin, joiValidate(userValidator.update, { strict: false }), async (req, res) => {
+  app.put('/api/users/:id', isLogin, joiValidate(userValidator.update), async (req, res) => {
     let { id } = req.items;
     if (req.user.role === 'admin' || id === req.user.id) {
       const user = await User.findById(id);
