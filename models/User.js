@@ -97,7 +97,7 @@ UserSchema.methods.updateUser = function updateUser(user, data, callback) {
   user.username = data.body.username;
   user.phoneNo = data.body.phoneNo;
   user.admNo = data.body.admNo;
-  if(data.user.role === 'admin') {
+  if (data.user.role === 'admin') {
     user.email = data.body.email || user.email;
     user.flag = data.body.flag || user.flag;
     user.verified = data.body.verified || user.verified;

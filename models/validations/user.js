@@ -28,7 +28,12 @@ module.exports = {
       .String()
       .email()
       .required(),
-    phoneNo: Joi.types.Number().integer().min(10).max(10).optional(),
+    phoneNo: Joi.types
+      .Number()
+      .integer()
+      .min(10)
+      .max(10)
+      .optional(),
     admNo: Joi.types.String().optional(),
     token: Joi.types.String().optional(),
     role: Joi.types.String().optional(),
