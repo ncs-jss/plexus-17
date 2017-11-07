@@ -1,42 +1,39 @@
+const router = require('express').Router();
 const { joiValidate } = require('express-joi');
 
 const User = require('../models/User');
 const userValidator = require('../models/validations/user');
-const { isLogin, isAdmin, isManager } = require('../middlewares/roleManager.mw');
+const { isLogin, isAdmin, isAdminOrSelf } = require('../middlewares/roleManager.mw');
 
-module.exports = app => {
-  // User Routes
-  app.get('/api/users/:id', isLogin, joiValidate(userValidator.get), async (req, res) => {
-    let { id } = req.items;
-    const user = await User.findById(id);
-    if (user.role === 'admin' && req.user.role !== 'admin') {
-      return res.status(403).send({
-        error: 'Access to admin details not allowed'
-      });
-    }
-    res.send(user);
-  });
+router.use('/:id', isLogin)
 
-  app.put('/api/users/:id', isLogin, joiValidate(userValidator.update), async (req, res) => {
-    let { id } = req.items;
-    if (req.user.role === 'admin' || id === req.user.id) {
-      const user = await User.findById(id);
-      user.updateUser(user, req);
-      return res.send(user);
-    }
-    res.status(403).send({
-      error: 'update other users details is not allowed'
-    });
-  });
+// User Routes
+router.route('/:id')
+.get(joiValidate(userValidator.get), isAdminOrSelf, async (req, res) => {
+  let { id } = req.items;
+  const user = await User.findById(id);
+  res.send(user);
+})
+.put(joiValidate(userValidator.update), isAdminOrSelf, async (req, res) => {
+  const { id } = req.items;
+  const user = await User.findOneAndUpdate(
+    { _id: id },
+    { $set: req.body },
+    { new: true }
+  );
+  return res.send(user);
+});
 
-  // Admin Routes
-  app.get('/api/users', isAdmin, joiValidate(userValidator.getList), async (req, res) => {
-    let { limit, skip, fields } = req.items;
-    limit = parseInt(limit);
-    skip = parseInt(skip);
-    const users = await User.find()
-      .limit(limit)
-      .skip(skip);
-    res.send(users);
-  });
-};
+// Admin Routes
+router.get('', isAdmin, joiValidate(userValidator.getList), async (req, res) => {
+  let { limit, skip, fields } = req.items;
+  limit = parseInt(limit);
+  skip = parseInt(skip);
+  const users = await User.find()
+    .limit(limit)
+    .skip(skip);
+  res.send(users);
+});
+
+
+module.exports = router;
