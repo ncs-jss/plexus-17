@@ -22,11 +22,26 @@ module.exports = {
   create: {},
   update: {
     id: Joi.types.String().required(),
-    name: Joi.types.String().optional(),
-    email: Joi.types.String().required(),
-    username: Joi.types.String().allow('').allow(null),
-    phoneNo: Joi.types.String().allow('').allow(null),
-    admNo: Joi.types.String().allow('').allow(null)
+    name: Joi.types.String().required(),
+    username: Joi.types.String().optional(),
+    email: Joi.types
+      .String()
+      .email()
+      .required(),
+    phoneNo: Joi.types
+      .Number()
+      .integer()
+      .min(10)
+      .max(10)
+      .optional(),
+    admNo: Joi.types.String().optional(),
+    token: Joi.types.String().optional(),
+    role: Joi.types.String().optional(),
+    type: Joi.types.String().optional(),
+    societyId: Joi.types.String().optional(),
+    arenaId: Joi.types.String().optional(),
+    verified: Joi.types.String().optional(),
+    flag: Joi.types.String().optional()
   },
   delete: {
     id: Joi.types.String().required()
