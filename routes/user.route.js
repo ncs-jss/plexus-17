@@ -5,10 +5,9 @@ const User = require('../models/User');
 const userValidator = require('../models/validations/user');
 const { isLogin, isAdmin, isAdminOrSelf } = require('../middlewares/roleManager.mw');
 
-router.use('/:id', isLogin);
-
 // User Routes
 router
+  .use('/:id', isLogin)
   .route('/:id')
   .get(joiValidate(userValidator.get), isAdminOrSelf, async (req, res) => {
     let { id } = req.items;
@@ -22,7 +21,7 @@ router
   });
 
 // Admin Routes
-router.get('', isAdmin, joiValidate(userValidator.getList), async (req, res) => {
+router.get('/', isAdmin, joiValidate(userValidator.getList), async (req, res) => {
   let { limit, skip, fields } = req.items;
   limit = parseInt(limit);
   skip = parseInt(skip);
