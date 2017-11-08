@@ -22,7 +22,12 @@ module.exports = {
   create: {},
   update: {
     id: Joi.types.String().required(),
+    name: Joi.types.String().required(),
     username: Joi.types.String().optional(),
+    email: Joi.types
+      .String()
+      .email()
+      .required(),
     phoneNo: Joi.types
       .Number()
       .integer()
