@@ -2,38 +2,59 @@ const router = require('express').Router();
 const { joiValidate } = require('express-joi');
 
 const User = require('../models/User');
-const userValidator = require('../models/validations/user');
+const userJoi = require('../models/validations/user.joi');
 const { isLogin, isAdmin, isAdminOrSelf } = require('../middlewares/roleManager.mw');
+
+const userValidator = (method, req, res, next) => (req, res, next) => {
+  return joiValidate(userJoi[method][req.user.role])(req, res, next);
+};
 
 // User Routes
 router
   .use('/:id', isLogin)
   .route('/:id')
-  .get(joiValidate(userValidator.get), isAdminOrSelf, async (req, res) => {
+  .get(userValidator('get'), isAdminOrSelf, async (req, res) => {
     let { id } = req.items;
     const user = await User.findById(id);
     res.send(user);
   })
-  .put(joiValidate(userValidator.update), isAdminOrSelf, async (req, res) => {
+  .put(userValidator('update'), isAdminOrSelf, async (req, res) => {
     const data = req.body;
     const userRole = req.user.role;
     if (userRole !== 'admin') {
       data.role = req.user.role;
     }
-    const { id } = req.items;
-    const user = await User.findOneAndUpdate({ _id: id }, { $set: data }, { new: true });
+    const user = await User.findByIdAndUpdate(req.items.id, { $set: data }, { new: true });
+    return res.send(user);
+  })
+  .delete(userValidator('remove'), isAdmin, async (req, res) => {
+    const user = await User.findByIdAndRemove(req.items.id);
     return res.send(user);
   });
 
 // Admin Routes
-router.get('/', isAdmin, joiValidate(userValidator.getList), async (req, res) => {
-  let { limit, skip, fields } = req.items;
-  limit = parseInt(limit);
-  skip = parseInt(skip);
-  const users = await User.find()
-    .limit(limit)
-    .skip(skip);
-  res.send(users);
-});
+router
+  .use('/', isLogin, isAdmin)
+  .route('/')
+  .get(userValidator('list'), async (req, res) => {
+    let { limit, skip, fields } = req.items;
+    limit = parseInt(limit);
+    skip = parseInt(skip);
+    const users = await User.find()
+      .limit(limit)
+      .skip(skip)
+      .select(fields);
+    res.send(users);
+  })
+  .post(userValidator('create'), async (req, res) => {
+    const { name, email, role, verified } = req.body;
+    const user = await new User({
+      name,
+      email,
+      role,
+      verified
+    }).save();
+    res.send(user);
+  });
 
 module.exports = router;

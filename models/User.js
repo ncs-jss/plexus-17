@@ -79,19 +79,6 @@ const UserSchema = new Schema(
   }
 );
 
-UserSchema.statics.addUser = function addUser(service, profile, callback) {
-  const authId = {};
-  authId[service] = profile.id;
-  return new User({
-    authId,
-    name: profile.displayName,
-    email: profile.emails[0].value,
-    avatar: {
-      url: profile.photos[0].value
-    }
-  }).save();
-};
-
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
