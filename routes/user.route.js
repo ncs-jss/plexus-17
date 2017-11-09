@@ -15,8 +15,13 @@ router
     res.send(user);
   })
   .put(joiValidate(userValidator.update), isAdminOrSelf, async (req, res) => {
+    const data = req.body;
+    const userRole = req.user.role;
+    if (userRole !== 'admin') {
+      data.role = req.user.role;
+    }
     const { id } = req.items;
-    const user = await User.findOneAndUpdate({ _id: id }, { $set: req.body }, { new: true });
+    const user = await User.findOneAndUpdate({ _id: id }, { $set: data }, { new: true });
     return res.send(user);
   });
 
