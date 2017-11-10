@@ -5,18 +5,20 @@ const mapPresetToFields = ({ preset, fields }) => {
     profile: 'name username email authId avatar',
     imp: 'name email token username verified flag type role',
     short: '-updatedAt -createdAt -flag -verified -_arena -token'
-  }
+  };
 
   fields = fields || '';
-  
+
   return (preset ? presetMap[preset] : fields).split(' ');
-}
+};
 
 module.exports = {
-  list: async function(options = {
-    limit: 10,
-    skip: 0,
-  }) {
+  list: async function(
+    options = {
+      limit: 10,
+      skip: 0
+    }
+  ) {
     options.limit = parseInt(options.limit);
     options.skip = parseInt(options.skip);
     fields = mapPresetToFields(options);
@@ -35,12 +37,16 @@ module.exports = {
     }
     return new User(data).save();
   },
-  update: async function(id, data, options = {
-    new: true
-  }) {
-    return User.findByIdAndUpdate(id, { $set: data }, options)
+  update: async function(
+    id,
+    data,
+    options = {
+      new: true
+    }
+  ) {
+    return User.findByIdAndUpdate(id, { $set: data }, options);
   },
   remove: async function(id) {
-    return User.findByIdAndRemove(id)
+    return User.findByIdAndRemove(id);
   }
 };
