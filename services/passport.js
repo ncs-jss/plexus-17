@@ -17,14 +17,14 @@ const createUser = async (service, accessToken, refreshToken, profile, done) => 
     avatar: {
       url: profile.photos[0].value
     }
-  }
+  };
   try {
     const user = await UserService.create(userData);
     done(null, user);
   } catch (err) {
     done(err, null);
   }
-}
+};
 
 passport.serializeUser((user, done) => {
   done(null, user.id);

@@ -1,7 +1,7 @@
 const User = require('../models/User');
 
 module.exports = {
-  create: async function (userData) {
+  create: async function(userData) {
     const existingUser = await User.findOne({
       authId: userData.authId
     });
