@@ -5,7 +5,26 @@ const mongoose = require('mongoose');
 
 const config = require('../config');
 const User = require('../models/User');
-const { addUser } = require('./user.service.js');
+const UserService = require('./user.service');
+
+const createUser = async (service, accessToken, refreshToken, profile, done) => {
+  const authId = {};
+  authId[service] = profile.id;
+  const userData = {
+    authId,
+    name: profile.displayName,
+    email: profile.emails[0].value,
+    avatar: {
+      url: profile.photos[0].value
+    }
+  };
+  try {
+    const user = await UserService.create(userData);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
+};
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -29,7 +48,7 @@ passport.use(
       callbackURL: '/auth/google/callback',
       proxy: true
     },
-    (...args) => addUser('google', ...args)
+    (...args) => createUser('google', ...args)
   )
 );
 
@@ -42,6 +61,6 @@ passport.use(
       profileFields: ['id', 'name', 'picture.type(large)', 'emails', 'displayName', 'about', 'gender'],
       proxy: true
     },
-    (...args) => addUser('facebook', ...args)
+    (...args) => createUser('facebook', ...args)
   )
 );

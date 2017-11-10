@@ -4,6 +4,7 @@ const { joiValidate } = require('express-joi');
 const User = require('../models/User');
 const userJoi = require('../models/validations/user.joi');
 const { isLogin, isAdmin, isAdminOrSelf } = require('../middlewares/roleManager.mw');
+const UserService = require('../services/user.service');
 
 const userValidator = (method, req, res, next) => (req, res, next) => {
   return joiValidate(userJoi[method][req.user.role])(req, res, next);
@@ -47,13 +48,7 @@ router
     res.send(users);
   })
   .post(userValidator('create'), async (req, res) => {
-    const { name, email, role, verified } = req.body;
-    const user = await new User({
-      name,
-      email,
-      role,
-      verified
-    }).save();
+    const user = await UserService.create(req.body);
     res.send(user);
   });
 
