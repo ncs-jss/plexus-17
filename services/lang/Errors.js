@@ -1,10 +1,9 @@
 const Errors = {
-  user: {
-    update: "Error in updating user's data",
-    create: 'Error in creating new user',
-    edit: "Error in editing user's data",
-    delete: "Error in deleting user's data"
-  }
+  list: 'Error in listing data',
+  get: 'Error in getting data',
+  create: 'Error in creating',
+  update: 'Error in updating data',
+  remove: 'Error in deleting data'
 };
 
-module.exports = Error;
+module.exports = Errors;
