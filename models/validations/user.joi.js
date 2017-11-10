@@ -14,7 +14,8 @@ const list = {
       .min(0)
       .max(25)
       .required(),
-    fields: Joi.types.String().optional()
+    fields: Joi.types.String(),
+    preset: Joi.types.String().valid(['profile', 'imp', 'short'])
   }),
   admin: Joi.object({
     limit: Joi.types
@@ -29,16 +30,21 @@ const list = {
       .min(0)
       .max(25)
       .required(),
-    fields: Joi.types.String().optional()
+    fields: Joi.types.String(),
+    preset: Joi.types.String().valid(['profile', 'imp', 'short'])
   })
 };
 
 const get = {
   user: Joi.object({
-    id: Joi.types.String().required()
+    id: Joi.types.String().required(),
+    fields: Joi.types.String(),
+    preset: Joi.types.String().valid(['profile', 'imp', 'short'])
   }),
   admin: Joi.object({
-    id: Joi.types.String().required()
+    id: Joi.types.String().required(),
+    fields: Joi.types.String(),
+    preset: Joi.types.String().valid(['profile', 'imp', 'short'])
   })
 };
 
@@ -49,48 +55,37 @@ const create = {
       .String()
       .email()
       .required(),
-    role: Joi.types
-      .String()
-      .allow(['admin', 'manager', 'editor', 'user'])
-      .optional(),
-    verified: Joi.types.boolean().optional()
+    role: Joi.types.String().valid(['admin', 'manager', 'editor', 'user']),
+    verified: Joi.types.boolean()
   })
 };
 
 const update = {
   user: Joi.object({
     id: Joi.types.String().required(),
-    username: Joi.types.String().optional(),
+    username: Joi.types.String(),
     phoneNo: Joi.types
       .Number()
       .integer()
       .min(10)
       .max(10)
-      .optional()
   }),
   admin: Joi.object({
     id: Joi.types.String().required(),
-    username: Joi.types.String().optional(),
+    username: Joi.types.String(),
     phoneNo: Joi.types
       .Number()
       .integer()
       .min(10)
-      .max(10)
-      .optional(),
-    admNo: Joi.types.String().optional(),
-    token: Joi.types.String().optional(),
-    societyId: Joi.types.String().optional(),
-    arenaId: Joi.types.String().optional(),
-    role: Joi.types
-      .String()
-      .allow(['admin', 'manager', 'editor', 'user'])
-      .optional(),
-    type: Joi.types
-      .String()
-      .allow(['individual', 'societyMember', 'societyExec'])
-      .optional(),
-    verified: Joi.types.boolean().optional(),
-    flag: Joi.types.boolean().optional()
+      .max(10),
+    admNo: Joi.types.String(),
+    token: Joi.types.String(),
+    societyId: Joi.types.String(),
+    arenaId: Joi.types.String(),
+    role: Joi.types.String().valid(['admin', 'manager', 'editor', 'user']),
+    type: Joi.types.String().valid(['individual', 'societyMember', 'societyExec']),
+    verified: Joi.types.boolean(),
+    flag: Joi.types.boolean()
   })
 };
 
@@ -103,7 +98,7 @@ const remove = {
 module.exports = {
   list,
   get,
-  update,
   create,
+  update,
   remove
 };
