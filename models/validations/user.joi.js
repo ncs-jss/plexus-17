@@ -50,9 +50,7 @@ const create = {
       .String()
       .email()
       .required(),
-    role: Joi.types
-      .String()
-      .valid(['admin', 'manager', 'editor', 'user']),
+    role: Joi.types.String().valid(['admin', 'manager', 'editor', 'user']),
     verified: Joi.types.boolean()
   })
 };
@@ -66,7 +64,6 @@ const update = {
       .integer()
       .min(10)
       .max(10)
-      
   }),
   admin: Joi.object({
     id: Joi.types.String().required(),
@@ -80,12 +77,8 @@ const update = {
     token: Joi.types.String(),
     societyId: Joi.types.String(),
     arenaId: Joi.types.String(),
-    role: Joi.types
-      .String()
-      .valid(['admin', 'manager', 'editor', 'user']),
-    type: Joi.types
-      .String()
-      .valid(['individual', 'societyMember', 'societyExec']),
+    role: Joi.types.String().valid(['admin', 'manager', 'editor', 'user']),
+    type: Joi.types.String().valid(['individual', 'societyMember', 'societyExec']),
     verified: Joi.types.boolean(),
     flag: Joi.types.boolean()
   })
