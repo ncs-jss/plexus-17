@@ -16,20 +16,15 @@ router
   .route('/:id')
   .get(userValidator('get'), isAdminOrSelf, async (req, res) => {
     let { id } = req.items;
-    const user = await User.findById(id);
+    const user = await UserService.get(id, req.query);
     res.send(user);
   })
   .put(userValidator('update'), isAdminOrSelf, async (req, res) => {
-    const data = req.body;
-    const userRole = req.user.role;
-    if (userRole !== 'admin') {
-      data.role = req.user.role;
-    }
-    const user = await User.findByIdAndUpdate(req.items.id, { $set: data }, { new: true });
+    const user = await UserService.update(req.items.id, req.body);
     return res.send(user);
   })
   .delete(userValidator('remove'), isAdmin, async (req, res) => {
-    const user = await User.findByIdAndRemove(req.items.id);
+    const user = await UserService.remove(req.items.id);
     return res.send(user);
   });
 
@@ -38,13 +33,7 @@ router
   .use('/', isLogin, isAdmin)
   .route('/')
   .get(userValidator('list'), async (req, res) => {
-    let { limit, skip, fields } = req.items;
-    limit = parseInt(limit);
-    skip = parseInt(skip);
-    const users = await User.find()
-      .limit(limit)
-      .skip(skip)
-      .select(fields);
+    const users = await UserService.list(req.items);
     res.send(users);
   })
   .post(userValidator('create'), async (req, res) => {

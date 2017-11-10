@@ -14,7 +14,8 @@ const list = {
       .min(0)
       .max(25)
       .required(),
-    fields: Joi.types.String()
+    fields: Joi.types.String(),
+    preset: Joi.types.String().valid(['profile', 'imp', 'short'])
   }),
   admin: Joi.object({
     limit: Joi.types
@@ -30,16 +31,20 @@ const list = {
       .max(25)
       .required(),
     fields: Joi.types.String(),
-    preset: Joi.types.String().valid(['profile', 'imp', 'full', 'short'])
+    preset: Joi.types.String().valid(['profile', 'imp', 'short'])
   })
 };
 
 const get = {
   user: Joi.object({
-    id: Joi.types.String().required()
+    id: Joi.types.String().required(),
+    fields: Joi.types.String(),
+    preset: Joi.types.String().valid(['profile', 'imp', 'short'])
   }),
   admin: Joi.object({
-    id: Joi.types.String().required()
+    id: Joi.types.String().required(),
+    fields: Joi.types.String(),
+    preset: Joi.types.String().valid(['profile', 'imp', 'short'])
   })
 };
 
@@ -93,7 +98,7 @@ const remove = {
 module.exports = {
   list,
   get,
-  update,
   create,
+  update,
   remove
 };
