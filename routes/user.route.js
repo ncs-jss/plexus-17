@@ -48,14 +48,7 @@ router
     res.send(users);
   })
   .post(userValidator('create'), async (req, res) => {
-    // const { name, email, role, verified } = req.body;
     const user = await UserService.create(req.body);
-    /*const user = await new User({
-      name,
-      email,
-      role,
-      verified
-    }).save();*/
     res.send(user);
   });
 
