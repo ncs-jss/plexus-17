@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Messages = require('./lang/Messages.js');
 
 const mapPresetToFields = ({ preset, fields = '' }) => {
   const presetMap = {
@@ -6,8 +7,6 @@ const mapPresetToFields = ({ preset, fields = '' }) => {
     imp: 'name,email,token,username,verified,flag,type,role',
     short: '-updatedAt,-createdAt,-flag,-verified,-_arena,-token'
   };
-
-  // fields = fields || '';
   return (preset ? presetMap[preset] : fields).split(',');
 };
 

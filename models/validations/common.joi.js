@@ -13,7 +13,5 @@ module.exports = {
     .min(0)
     .max(25)
     .required(),
-  id: Joi.types
-    .String()
-    .required()
-}
+  id: Joi.types.String().required()
+};
