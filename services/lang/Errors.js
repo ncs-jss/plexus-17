@@ -1,4 +1,4 @@
-var Errors = {
+const Errors = {
   user: {
     update: "Error in updating user's data",
     create: 'Error in creating new user',

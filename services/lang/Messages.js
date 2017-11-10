@@ -1,4 +1,4 @@
-var Messages = {
+const Messages = {
   user: {
     update: "User's data is updated successfully",
     create: 'New user is created successfully',
