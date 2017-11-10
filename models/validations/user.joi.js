@@ -1,35 +1,16 @@
 const { Joi } = require('express-joi');
+const { limit, skip, id } = require('./common.joi');
 
 const list = {
   user: Joi.object({
-    limit: Joi.types
-      .Number()
-      .integer()
-      .min(1)
-      .max(25)
-      .required(),
-    skip: Joi.types
-      .Number()
-      .integer()
-      .min(0)
-      .max(25)
-      .required(),
+    limit,
+    skip,
     fields: Joi.types.String(),
     preset: Joi.types.String().valid(['profile', 'imp', 'short'])
   }),
   admin: Joi.object({
-    limit: Joi.types
-      .Number()
-      .integer()
-      .min(1)
-      .max(25)
-      .required(),
-    skip: Joi.types
-      .Number()
-      .integer()
-      .min(0)
-      .max(25)
-      .required(),
+    limit,
+    skip,
     fields: Joi.types.String(),
     preset: Joi.types.String().valid(['profile', 'imp', 'short'])
   })
@@ -37,12 +18,12 @@ const list = {
 
 const get = {
   user: Joi.object({
-    id: Joi.types.String().required(),
+    id,
     fields: Joi.types.String(),
     preset: Joi.types.String().valid(['profile', 'imp', 'short'])
   }),
   admin: Joi.object({
-    id: Joi.types.String().required(),
+    id,
     fields: Joi.types.String(),
     preset: Joi.types.String().valid(['profile', 'imp', 'short'])
   })
@@ -62,7 +43,7 @@ const create = {
 
 const update = {
   user: Joi.object({
-    id: Joi.types.String().required(),
+    id,
     username: Joi.types.String(),
     phoneNo: Joi.types
       .Number()
@@ -71,7 +52,7 @@ const update = {
       .max(10)
   }),
   admin: Joi.object({
-    id: Joi.types.String().required(),
+    id,
     username: Joi.types.String(),
     phoneNo: Joi.types
       .Number()
@@ -91,7 +72,7 @@ const update = {
 
 const remove = {
   admin: Joi.object({
-    id: Joi.types.String().required()
+    id
   })
 };
 
