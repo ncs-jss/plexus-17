@@ -19,9 +19,9 @@ Plexus aims to be a one stop solution for all kinds of digital events like Quize
 
 ## To Start Local Server -
 
-   1. Run `npm start` to start backend server.
-   2. Run `npm run client` to start frontend server.
-   3. Navigate to [http://localhost:3000](http://localhost:3000) in the browser.
+ 1. Run `npm start` to start backend server.
+ 2. Run `npm run client` to start frontend server.
+ 3. Navigate to [http://localhost:3000](http://localhost:3000) in the browser.
 
 
 ## Guidelines
@@ -37,3 +37,16 @@ Note -
 3. To get **facebookAppId** and **facebookAppSecret** make a new app at [here](https://developers.facebook.com) and add the facebook login product.
 4. If you don't have **mongodb** locally, then create a remote db [here](https://mlab.com/home) or you can download it from [here](https://www.mongodb.com/download-center?jmp=docs&_ga=2.47151591.1318332256.1507577170-1071278786.1507217039#community)
 5. Whenever you commit the code. Prettier runs and it formats the code. If any changes are made then do stage again and commit.
+
+
+## Project Maintainers
+
+ * [Ankit Jain](https://github.com/ankitjain28may)
+ * [Aditya Agarwal](https://github.com/itaditya)
+
+## Other Contributors
+
+ * [Kunal Vishnoi](https://github.com/kunalvishnoi)
+ * [Shubham Singh](https://github.com/ShubhMisaki)
+ * [Rohit Chandra](https://github.com/krrohitch)
+
