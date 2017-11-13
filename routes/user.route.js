@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { joiValidate } = require('express-joi');
 
 const userJoi = require('../models/validations/user.joi');
-const { isLogin, isAdmin, isAdminOrSelf } = require('../middlewares/roleManager.mw');
+const { isLogin, isAdmin, isAdminOrSelf, isSelf } = require('../middlewares/roleManager.mw');
 const UserService = require('../services/user.service');
 const Errors = require('../services/lang/Errors');
 
@@ -18,12 +18,12 @@ router
     let { id } = req.items;
     try {
       const user = await UserService.get(id, req.query);
+      res.send(user);
     } catch (err) {
       return res.status(500).send({
         error: Errors.get
       });
     }
-    res.send(user);
   })
   .put(userValidator('update'), isAdminOrSelf, async (req, res) => {
     try {

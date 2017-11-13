@@ -1,20 +1,36 @@
+const isFunction = require('lodash/isfunction');
+
 function isRole(role, req, res, next) {
+  const isMw = isFunction(next);
   if (!(req.user && req.user.role === role)) {
-    return res.status(401).send({
-      error: `You are not logged in as ${role}!`
-    });
+    if (isMw) {
+      return res.status(401).send({
+        error: `You are not logged in as ${role}!`
+      });
+    }
+    return false;
   }
-  next();
+  if (isMw) {
+    return next();
+  }
+  return true;
 }
 
 module.exports = {
   isLogin(req, res, next) {
+    const isMw = isFunction(next);
     if (!req.user) {
-      return res.status(401).send({
-        error: 'You are not Logged In!'
-      });
+      if (isMw) {
+        return res.status(401).send({
+          error: 'You are not Logged In!'
+        });
+      }
+      return false;
     }
-    next();
+    if (isMw) {
+      return next();
+    }
+    return true;
   },
   isRole,
   isAdmin(...args) {
@@ -27,14 +43,33 @@ module.exports = {
     return isRole('editor', ...args);
   },
   isSelf(req, res, next) {
-    console.log(req.items);
+    const isMw = isFunction(next);
+    if (req.user.id !== req.items.id) {
+      if (isMw) {
+        return res.status(403).send({
+          error: "You don't have the permission to do this"
+        });
+      }
+      return false;
+    }
+    if (isMw) {
+      return next();
+    }
+    return true;
   },
   isAdminOrSelf(req, res, next) {
+    const isMw = isFunction(next);
     if (req.user.role !== 'admin' && req.user.id !== req.items.id) {
-      return res.status(403).send({
-        error: "You don't have the permission to do this"
-      });
+      if (isMw) {
+        return res.status(403).send({
+          error: "You don't have the permission to do this"
+        });
+      }
+      return false;
     }
-    next();
+    if (isMw) {
+      return next();
+    }
+    return true;
   }
 };
