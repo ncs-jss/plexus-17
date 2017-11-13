@@ -39,7 +39,7 @@ Note -
 5. Whenever you commit the code. Prettier runs and it formats the code. If any changes are made then do stage again and commit.
 
 
-## Project Maintainers
+## Technology Stack
 
  * Create-React-App (**CRA**)
  * Webpack
