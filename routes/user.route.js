@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { joiValidate } = require('express-joi');
 
-const User = require('../models/User');
 const userJoi = require('../models/validations/user.joi');
 const { isLogin, isAdmin, isAdminOrSelf } = require('../middlewares/roleManager.mw');
 const UserService = require('../services/user.service');
