@@ -9,9 +9,28 @@ import reducers from './reducers';
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
+if (process.env.NODE_ENV !== 'production') {
+  if (module.hot) {
+    module.hot.accept('./reducers', () => {
+      store.replaceReducer(reducers);
+    });
+  }
+}
+
 ReactDom.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.querySelector('#root')
+  document.getElementById('root')
 );
+
+if (module.hot) {
+  module.hot.accept('./components/App', () => {
+    ReactDom.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.getElementById('root')
+    );
+  });
+}
