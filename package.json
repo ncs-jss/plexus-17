@@ -11,7 +11,8 @@
     "start": "heroku local dev",
     "client": "npm start --prefix client",
     "heroku-postbuild": "(npm install --prefix client) && (npm run build --prefix client)",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:dev": "heroku local test-dev",
+    "test": "heroku local test",
     "format": "prettier --write \"**/*.js\"",
     "precommit": "npm run format"
   },
@@ -33,9 +34,11 @@
     "passport-google-oauth20": "^1.0.0",
     "path-parser": "^2.0.2",
     "prettier": "^1.7.4",
-    "slug": "^0.9.1"
+    "slug": "^0.9.1",
+    "supertest": "^3.0.0"
   },
   "devDependencies": {
-    "husky": "^0.14.3"
+    "husky": "^0.14.3",
+    "tape": "^4.8.0"
   }
 }
