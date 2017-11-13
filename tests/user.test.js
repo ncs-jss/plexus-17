@@ -1,9 +1,11 @@
 const test = require('tape');
 const request = require('supertest')('http://localhost:5000');
 
+const { testAdminCookie, testUserCookie } = process.env;
+
 const cookies = {
-  admin: process.env.testAdminCookie,
-  user: process.env.testUserCookie
+  admin: testAdminCookie,
+  user: testUserCookie
 };
 
 test('GET /users', assert => {
