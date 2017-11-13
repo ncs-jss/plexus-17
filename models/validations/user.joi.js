@@ -13,7 +13,7 @@ const list = (() => {
   return {
     user: Joi.object(base),
     admin: Joi.object(base)
-  }
+  };
 })();
 
 const get = (() => {
@@ -25,7 +25,7 @@ const get = (() => {
   return {
     user: Joi.object(base),
     admin: Joi.object(base)
-  }
+  };
 })();
 
 const create = (() => {
@@ -37,10 +37,10 @@ const create = (() => {
       .required(),
     role: Joi.types.String().valid(['admin', 'manager', 'editor', 'user']),
     verified: Joi.types.boolean()
-  }
+  };
   return {
     admin: Joi.object(base)
-  }
+  };
 })();
 
 const update = (() => {
@@ -62,20 +62,20 @@ const update = (() => {
     type: Joi.types.String().valid(['individual', 'societyMember', 'societyExec']),
     verified: Joi.types.boolean(),
     flag: Joi.types.boolean()
-  }
+  };
   return {
     user: Joi.object(base),
     admin: Joi.object(Object.assign(base, adminOnly))
-  }
+  };
 })();
 
 const remove = (() => {
   const base = {
     id
-  }
+  };
   return {
     admin: Joi.object(base)
-  }
+  };
 })();
 
 module.exports = {
