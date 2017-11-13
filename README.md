@@ -41,6 +41,19 @@ Note -
 
 ## Project Maintainers
 
+ * Create-React-App (**CRA**)
+ * Webpack
+ * React
+ * Redux
+ * Node
+ * Express
+ * Mongodb / Mongoose
+ * Tape
+ * Prettier
+ * Heroku
+
+## Project Maintainers
+
  * [Ankit Jain](https://github.com/ankitjain28may)
  * [Aditya Agarwal](https://github.com/itaditya)
 
