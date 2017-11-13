@@ -1,36 +1,35 @@
 const { Joi } = require('express-joi');
 const { limit, skip, id } = require('./common.joi');
 
-const list = {
-  user: Joi.object({
+const preset = Joi.types.String().valid(['profile', 'imp', 'short']);
+
+const list = (() => {
+  const base = {
     limit,
     skip,
     fields: Joi.types.String(),
-    preset: Joi.types.String().valid(['profile', 'imp', 'short'])
-  }),
-  admin: Joi.object({
-    limit,
-    skip,
-    fields: Joi.types.String(),
-    preset: Joi.types.String().valid(['profile', 'imp', 'short'])
-  })
-};
+    preset
+  };
+  return {
+    user: Joi.object(base),
+    admin: Joi.object(base)
+  };
+})();
 
-const get = {
-  user: Joi.object({
+const get = (() => {
+  const base = {
     id,
     fields: Joi.types.String(),
-    preset: Joi.types.String().valid(['profile', 'imp', 'short'])
-  }),
-  admin: Joi.object({
-    id,
-    fields: Joi.types.String(),
-    preset: Joi.types.String().valid(['profile', 'imp', 'short'])
-  })
-};
+    preset
+  };
+  return {
+    user: Joi.object(base),
+    admin: Joi.object(base)
+  };
+})();
 
-const create = {
-  admin: Joi.object({
+const create = (() => {
+  const base = {
     name: Joi.types.String().required(),
     email: Joi.types
       .String()
@@ -38,11 +37,14 @@ const create = {
       .required(),
     role: Joi.types.String().valid(['admin', 'manager', 'editor', 'user']),
     verified: Joi.types.boolean()
-  })
-};
+  };
+  return {
+    admin: Joi.object(base)
+  };
+})();
 
-const update = {
-  user: Joi.object({
+const update = (() => {
+  const base = {
     id,
     username: Joi.types.String(),
     phoneNo: Joi.types
@@ -50,15 +52,8 @@ const update = {
       .integer()
       .min(10)
       .max(10)
-  }),
-  admin: Joi.object({
-    id,
-    username: Joi.types.String(),
-    phoneNo: Joi.types
-      .Number()
-      .integer()
-      .min(10)
-      .max(10),
+  };
+  const adminOnly = {
     admNo: Joi.types.String(),
     token: Joi.types.String(),
     societyId: Joi.types.String(),
@@ -67,14 +62,21 @@ const update = {
     type: Joi.types.String().valid(['individual', 'societyMember', 'societyExec']),
     verified: Joi.types.boolean(),
     flag: Joi.types.boolean()
-  })
-};
+  };
+  return {
+    user: Joi.object(base),
+    admin: Joi.object(Object.assign(base, adminOnly))
+  };
+})();
 
-const remove = {
-  admin: Joi.object({
+const remove = (() => {
+  const base = {
     id
-  })
-};
+  };
+  return {
+    admin: Joi.object(base)
+  };
+})();
 
 module.exports = {
   list,
