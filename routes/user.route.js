@@ -27,7 +27,7 @@ router
   })
   .put(userValidator('update'), isAdminOrSelf, async (req, res) => {
     try {
-      const user = await UserService.update(req.items.id, req.body);
+      const user = await UserService.update(req.items.id, req.body, req.query);
       return res.send(user);
     } catch (err) {
       return res.status(500).send({
@@ -37,7 +37,7 @@ router
   })
   .delete(userValidator('remove'), isAdmin, async (req, res) => {
     try {
-      const user = await UserService.remove(req.items.id);
+      const user = await UserService.remove(req.items.id, req.query);
       return res.send(user);
     } catch (err) {
       return res.status(500).send({
@@ -62,7 +62,7 @@ router
   })
   .post(userValidator('create'), async (req, res) => {
     try {
-      const user = await UserService.create(req.body);
+      const user = await UserService.create(req.body, req.query);
       return res.send(user);
     } catch (err) {
       return res.status(500).send({

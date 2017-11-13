@@ -26,25 +26,26 @@ module.exports = {
     fields = mapPresetToFields(options);
     return User.findById(id, fields);
   },
-  create: async data => {
-    const existingUser = await User.findOne({
-      authId: data.authId
-    });
+  create: async (data, options = {}) => {
+    fields = mapPresetToFields(options);
+    const existingUser = await User.findOne(
+      {
+        authId: data.authId
+      },
+      fields
+    );
     if (existingUser) {
       return existingUser;
     }
     return new User(data).save();
   },
-  update: async (
-    id,
-    data,
-    options = {
-      new: true
-    }
-  ) => {
+  update: async (id, data, options = {}) => {
+    options.fields = mapPresetToFields(options);
+    options.new = true;
     return User.findByIdAndUpdate(id, { $set: data }, options);
   },
-  remove: async id => {
-    return User.findByIdAndRemove(id);
+  remove: async (id, options = {}) => {
+    options.select = mapPresetToFields(options);
+    return User.findByIdAndRemove(id, options);
   }
 };

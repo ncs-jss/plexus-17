@@ -36,7 +36,9 @@ const create = (() => {
       .email()
       .required(),
     role: Joi.types.String().valid(['admin', 'manager', 'editor', 'user']),
-    verified: Joi.types.boolean()
+    verified: Joi.types.boolean(),
+    fields: Joi.types.String(),
+    preset
   };
   return {
     admin: Joi.object(base)
@@ -51,7 +53,9 @@ const update = (() => {
       .Number()
       .integer()
       .min(10)
-      .max(10)
+      .max(10),
+    fields: Joi.types.String(),
+    preset
   };
   const adminOnly = {
     admNo: Joi.types.String(),
@@ -71,7 +75,9 @@ const update = (() => {
 
 const remove = (() => {
   const base = {
-    id
+    id,
+    fields: Joi.types.String(),
+    preset
   };
   return {
     admin: Joi.object(base)
