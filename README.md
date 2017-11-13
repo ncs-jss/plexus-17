@@ -39,6 +39,19 @@ Note -
 5. Whenever you commit the code. Prettier runs and it formats the code. If any changes are made then do stage again and commit.
 
 
+## Technology Stack
+
+ * Create-React-App (**CRA**)
+ * Webpack
+ * React
+ * Redux
+ * Node
+ * Express
+ * Mongodb / Mongoose
+ * Tape
+ * Prettier
+ * Heroku
+
 ## Project Maintainers
 
  * [Ankit Jain](https://github.com/ankitjain28may)
