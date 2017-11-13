@@ -14,7 +14,7 @@
     "test:dev": "heroku local test-dev",
     "test": "heroku local test",
     "format": "prettier --write \"**/*.js\"",
-    "precommit": "npm run format && npm run test"
+    "precommit": "npm run format"
   },
   "keywords": [],
   "author": "Aditya Agarwal <adityaa803@gmail.com> (http://adi.surge.sh/)",
