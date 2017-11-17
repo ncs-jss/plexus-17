@@ -24,7 +24,10 @@ module.exports = {
   },
   get: async (id, options) => {
     fields = mapPresetToFields(options);
-    return User.findById(id, fields);
+    const { query_field = '_id' } = options;
+    const query = {};
+    query[query_field] = id;
+    return User.findOne(query, fields);
   },
   create: async (data, options = {}) => {
     fields = mapPresetToFields(options);
