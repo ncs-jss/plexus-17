@@ -1,13 +1,14 @@
 const { Joi } = require('express-joi');
-const { limit, skip, id } = require('./common.joi');
+const { limit, skip, id, query_field } = require('./common.joi');
 
 const preset = Joi.types.String().valid(['profile', 'imp', 'short']);
+const fields = Joi.types.String();
 
 const list = (() => {
   const base = {
     limit,
     skip,
-    fields: Joi.types.String(),
+    fields,
     preset
   };
   return {
@@ -19,7 +20,8 @@ const list = (() => {
 const get = (() => {
   const base = {
     id,
-    fields: Joi.types.String(),
+    query_field,
+    fields,
     preset
   };
   return {
@@ -37,7 +39,7 @@ const create = (() => {
       .required(),
     role: Joi.types.String().valid(['admin', 'manager', 'editor', 'user']),
     verified: Joi.types.boolean(),
-    fields: Joi.types.String(),
+    fields,
     preset
   };
   return {
@@ -54,7 +56,7 @@ const update = (() => {
       .integer()
       .min(10)
       .max(10),
-    fields: Joi.types.String(),
+    fields,
     preset
   };
   const adminOnly = {
@@ -76,7 +78,7 @@ const update = (() => {
 const remove = (() => {
   const base = {
     id,
-    fields: Joi.types.String(),
+    fields,
     preset
   };
   return {
