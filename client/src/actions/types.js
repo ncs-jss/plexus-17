@@ -1,2 +1,2 @@
-export const FETCH_USER = 'fetch_user';
-export const FETCH_EVENTS = 'fetch_events';
+export const USER_GET = 'user_get';
+export const EVENT_LIST = 'event_list';
