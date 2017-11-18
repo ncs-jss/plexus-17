@@ -37,4 +37,3 @@ export const listEvent = () => async dispatch => {
     payload: res.data
   });
 };
-
