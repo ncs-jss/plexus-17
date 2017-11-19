@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import styles from './Main.css';
-import EventList from '../EventList/EventList';
-import Event from '../Event/Event';
+import styles from './index.css';
+import EventList from '../EventList';
+import Event from '../Event';
 
 class Main extends Component {
   render() {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import styles from './Dashboard.css';
+import styles from './index.css';
 
 class Dashboard extends Component {
   render() {

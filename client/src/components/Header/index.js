@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
-import styles from './Header.css';
-import Logo from './Logo/Logo';
+import styles from './index.css';
+import Logo from './Logo';
 
 class Header extends Component {
   constructor(props) {

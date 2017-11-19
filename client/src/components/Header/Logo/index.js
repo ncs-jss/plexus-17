@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import styles from './Logo.css';
+import styles from './index.css';
 import logo from '../../../common/images/logo.png';
 
 class Logo extends Component {
