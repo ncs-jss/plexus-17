@@ -7,14 +7,17 @@ class Event extends Component {
     super(props);
     this.eventLinks = [
       {
+        id: 0,
         text: 'Errata',
         url: '/errata'
       },
       {
+        id: 1,
         text: 'Sherlocked',
         url: '/sherlocked'
       },
       {
+        id: 2,
         text: 'Khoj',
         url: '/khoj'
       }
@@ -24,8 +27,8 @@ class Event extends Component {
   }
 
   renderEventItems() {
-    return this.eventLinks.map((event, index) => {
-      return <EventItem baseUrl={this.baseUrl} event={event} key={index} />;
+    return this.eventLinks.map(event => {
+      return <EventItem baseUrl={this.baseUrl} event={event} key={event.id} />;
     });
   }
 
