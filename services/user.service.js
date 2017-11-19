@@ -5,7 +5,7 @@ const mapPresetToFields = ({ preset, fields = '' }) => {
   const presetMap = {
     profile: 'name,username,email,authId,avatar',
     imp: 'name,email,token,username,verified,flag,type,role',
-    short: '-updatedAt,-createdAt,-flag,-verified,-_arena,-token'
+    short: '-__v,-updatedAt,-createdAt,-flag,-verified,-_arena,-token'
   };
   return (preset ? presetMap[preset] : fields).split(',');
 };

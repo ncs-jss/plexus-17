@@ -1,20 +1,59 @@
 const test = require('tape');
+var tapSpec = require('tap-spec');
 
-const userHandler = require('./handlers/user.handler');
+test
+  .createStream()
+  .pipe(tapSpec())
+  .pipe(process.stdout);
+
+const { list: userListHandler, get: userGetHandler } = require('./handlers/user.handler');
 
 test('GET /users', assert => {
-  userHandler.list().end((err, { body: userList }) => {
+  userListHandler().end((err, { body: userList }) => {
     assert.notEqual(userList, [], "List of users shouldn't be empty");
     assert.end();
   });
 });
 
 test('GET /users/:id', assert => {
-  userHandler.list().end((err, { body: [user] }) => {
+  assert.plan(6);
+  userListHandler().end((err, { body: [user] }) => {
     //user holds the first user document in the userList array
-    userHandler.get(user._id).end((err, { body: userGet }) => {
-      assert.notEqual(userGet, user, 'Get user must match the one from user list');
-      assert.end();
+    userGetHandler(user._id).end((err, { body: userGet }) => {
+      assert.comment("Using user's id");
+      assert.deepEquals(userGet, user, 'userGet must match the one from user list');
+    });
+    userGetHandler(user.username, {
+      query_field: 'username'
+    }).end((err, { body: userGet }) => {
+      assert.comment("Using user's username");
+      assert.deepEquals(userGet, user, 'userGet must match the one from user list');
+    });
+
+    const presetMap = {
+      profile: ['_id', 'name', 'username', 'email', 'authId', 'avatar'],
+      imp: ['_id', 'name', 'email', 'token', 'username', 'verified', 'flag', 'type', 'role'],
+      short: ['_id', 'authId', 'avatar', 'email', 'name', 'role', 'type', 'username']
+    };
+    Object.entries(presetMap).map(([preset, keys]) => {
+      userGetHandler(user._id, {
+        preset
+      }).end((err, { body: userGet }) => {
+        assert.deepEquals(
+          Object.keys(userGet).sort(),
+          keys.sort(),
+          `userGet with preset ${preset} must have only these keys`
+        );
+      });
+    });
+    userGetHandler(user._id, {
+      fields: 'name'
+    }).end((err, { body: userGet }) => {
+      assert.deepEquals(
+        Object.keys(userGet),
+        ['_id', 'name'],
+        `userGet with field name must have only fields _id and name`
+      );
     });
   });
 });
