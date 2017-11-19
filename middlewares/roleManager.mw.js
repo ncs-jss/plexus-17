@@ -1,4 +1,4 @@
-const isFunction = require('lodash/isfunction');
+const isFunction = require('lodash/isFunction');
 
 function isRole(role, req, res, next) {
   const isMw = isFunction(next);
