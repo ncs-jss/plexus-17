@@ -15,9 +15,9 @@ const list = options => {
 };
 
 const get = (id, options) => {
-  console.log(`${apiUrl}/${id}`);
   return request
     .get(`${apiUrl}/${id}`)
+    .query(options)
     .set('Cookie', cookies.admin)
     .expect(200)
     .expect('Content-Type', /json/);

@@ -21,7 +21,8 @@ Plexus aims to be a one stop solution for all kinds of digital events like Quize
 
  1. Run `npm start` to start backend server.
  2. Run `npm run client` to start frontend server.
- 3. Navigate to [http://localhost:3000](http://localhost:3000) in the browser.
+ 3. Run `npm run test:watch` to start the test watchers to test if something breaks.
+ 4. Navigate to [http://localhost:3000](http://localhost:3000) in the browser.
 
 
 ## Guidelines
@@ -29,7 +30,8 @@ Plexus aims to be a one stop solution for all kinds of digital events like Quize
  2. Always make a separate branch in following format name-patch-#issueNo. Eg: aditya-patch-#62. (Words are separated by -).
  3. In the commit message do mention the issue no. Eg: fixes #1.
  4. Use proper code formatting. Run `npm run format` to make prettier format everything automagically.
- 5. Do mention if `npm install` is needed after merging the commit.
+ 5. Run `npm test` to check if nothing has broken.
+ 6. Do mention if `npm install` is needed after merging the commit.
 
 Note -
 1. Heroku Cli is used for handling **environment variables** and deploys.
