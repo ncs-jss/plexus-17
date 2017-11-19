@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import EventItem from './EventItem/EventItem';
+import EventItem from './EventItem';
 
 class Event extends Component {
   constructor(props) {

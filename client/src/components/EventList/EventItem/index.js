@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import styles from './EventItem.css';
+import styles from './index.css';
 
 class EventItem extends Component {
   render() {
