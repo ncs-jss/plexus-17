@@ -3,6 +3,7 @@ const { joiValidate } = require('express-joi');
 
 const userJoi = require('../models/validations/user.joi');
 const { isLogin, isAdmin, isAdminOrSelf, isSelf } = require('../middlewares/roleManager.mw');
+const isValidId = require('../middlewares/validId.mw');
 const UserService = require('../services/user.service');
 const Errors = require('../services/lang/Errors');
 
@@ -12,6 +13,7 @@ const userValidator = (method, req, res, next) => (req, res, next) => {
 
 // User Routes
 router
+  .use('/:id', isValidId)
   .use('/:id', isLogin)
   .route('/:id')
   .get(userValidator('get'), isAdminOrSelf, async (req, res) => {
