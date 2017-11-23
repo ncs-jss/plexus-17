@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const Event = require('../models/Event');
 
 const mapPresetToFields = ({ preset, fields = '' }) => {
   const presetMap = {
@@ -19,35 +19,37 @@ module.exports = {
     options.limit = parseInt(options.limit);
     options.skip = parseInt(options.skip);
     fields = mapPresetToFields(options);
-    return User.find({}, fields, options);
+    return Event.find({}, fields, options);
   },
   get: async (id, options) => {
     fields = mapPresetToFields(options);
     const { query_field = '_id' } = options;
     const query = {};
     query[query_field] = id;
-    return User.findOne(query, fields);
+    return Event.findOne(query, fields);
   },
   create: async (data, options = {}) => {
     fields = mapPresetToFields(options);
-    const existingUser = await User.findOne(
+    const existingEvent = await Event.findOne(
       {
-        authId: data.authId
+        name: data.name
       },
       fields
     );
-    if (existingUser) {
-      return existingUser;
+    if (existingEvent) {
+      return existingEvent;
     }
-    return new User(data).save();
+    return new Event(data).save();
   },
   update: async (id, data, options = {}) => {
+    //todo
     options.fields = mapPresetToFields(options);
     options.new = true;
-    return User.findByIdAndUpdate(id, { $set: data }, options);
+    return Event.findByIdAndUpdate(id, { $set: data }, options);
   },
   remove: async (id, options = {}) => {
+    //todo
     options.select = mapPresetToFields(options);
-    return User.findByIdAndRemove(id, options);
+    return Event.findByIdAndRemove(id, options);
   }
 };
