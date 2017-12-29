@@ -1,4 +1,4 @@
-const Event = require('../models/Event');
+const Event = require('mongoose').model('Event');
 
 const mapPresetToFields = ({ preset, fields = '' }) => {
   const presetMap = {

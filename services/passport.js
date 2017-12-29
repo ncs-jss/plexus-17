@@ -1,10 +1,9 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
-const mongoose = require('mongoose');
 
 const config = require('../config');
-const User = require('../models/User');
+const User = require('mongoose').model('User');
 const UserService = require('./user.service');
 
 const createUser = async (service, accessToken, refreshToken, profile, done) => {
