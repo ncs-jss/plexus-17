@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require('mongoose').model('User');
 
 const mapPresetToFields = ({ preset, fields = '' }) => {
   const presetMap = {

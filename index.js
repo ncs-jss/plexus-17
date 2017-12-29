@@ -6,7 +6,6 @@ const morgan = require('morgan');
 const passport = require('passport');
 const compression = require('compression');
 
-require('./services/passport');
 const config = require('./config');
 
 mongoose.Promise = global.Promise;
@@ -14,6 +13,9 @@ mongoose.connect(config.mongoURI, {
   useMongoClient: true
 });
 mongoose.set('debug', config.NODE_ENV === 'development');
+
+require('./models');
+require('./services/passport');
 
 const app = express();
 
