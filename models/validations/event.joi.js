@@ -1,10 +1,14 @@
 const { Joi } = require('express-joi');
+
 const { limit, skip, id } = require('./common.joi');
+
+const fields = Joi.types.String();
 
 const list = (() => {
   const base = {
     limit,
-    skip
+    skip,
+    fields
   };
   return {
     public: Joi.object(base),
