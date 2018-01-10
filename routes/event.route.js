@@ -9,13 +9,19 @@ const Errors = require('../services/lang/Errors');
 
 const eventValidator = (method, req, res, next) => (req, res, next) => {
   const role = req.user ? req.user.role : 'public';
-  return joiValidate(eventJoi[method][role])(req, res, next);
+  const validationSchema = eventJoi[method][role];
+  if (validationSchema) {
+    return joiValidate(validationSchema)(req, res, next);
+  }
+  return res.status(401).send({
+    error: `Not allowed for ${role}`
+  })
 };
 
 router
   .use('/:id', isValidId)
   .route('/:id')
-  .get(eventValidator('get'), async (req, res) => {
+  .get(eventValidator('get'), async(req, res) => {
     let { id } = req.items;
     try {
       const event = await EventService.get(id, req.query);
@@ -26,16 +32,16 @@ router
       });
     }
   })
-  .put(eventValidator('update'), async (req, res) => {
+  .put(eventValidator('update'), async(req, res) => {
     //todo
   })
-  .delete(eventValidator('remove'), async (req, res) => {
+  .delete(eventValidator('remove'), async(req, res) => {
     //todo
   });
 
 router
   .route('/')
-  .get(eventValidator('list'), async (req, res) => {
+  .get(eventValidator('list'), async(req, res) => {
     try {
       const events = await EventService.list(req.items);
       return res.send(events);
@@ -45,7 +51,7 @@ router
       });
     }
   })
-  .post(eventValidator('create'), isAdmin, async (req, res) => {
+  .post(eventValidator('create'), isAdmin, async(req, res) => {
     try {
       req.body = Object.assign(req.body, {
         state: 'toStart',

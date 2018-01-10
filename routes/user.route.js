@@ -8,7 +8,14 @@ const UserService = require('../services/user.service');
 const Errors = require('../services/lang/Errors');
 
 const userValidator = (method, req, res, next) => (req, res, next) => {
-  return joiValidate(userJoi[method][req.user.role])(req, res, next);
+  const role = req.user ? req.user.role : 'public';
+  const validationSchema = userJoi[method][role];
+  if (validationSchema) {
+    return joiValidate(validationSchema)(req, res, next);
+  }
+  return res.status(401).send({
+    error: `Not allowed for ${role}`
+  })
 };
 
 // User Routes
