@@ -9,7 +9,13 @@ const Errors = require('../services/lang/Errors');
 
 const eventValidator = (method, req, res, next) => (req, res, next) => {
   const role = req.user ? req.user.role : 'public';
-  return joiValidate(eventJoi[method][role])(req, res, next);
+  const validationSchema = eventJoi[method][role];
+  if (validationSchema) {
+    return joiValidate(validationSchema)(req, res, next);
+  }
+  return res.status(401).send({
+    error: `Not allowed for ${role}`
+  });
 };
 
 router
