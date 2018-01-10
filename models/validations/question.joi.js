@@ -36,6 +36,11 @@ const create = (() => {
       .String()
       .valid(['shortAns', 'para', 'options', 'file'])
       .required(),
+    options: Joi.types.array().min(1),
+    media: Joi.object({
+      type: Joi.string(),
+      url: Joi.string().required()
+    }),
     flag: Joi.types.boolean(),
     weightage: Joi.types.number().required()
   };
