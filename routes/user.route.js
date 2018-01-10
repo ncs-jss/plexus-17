@@ -15,7 +15,7 @@ const userValidator = (method, req, res, next) => (req, res, next) => {
   }
   return res.status(401).send({
     error: `Not allowed for ${role}`
-  })
+  });
 };
 
 // User Routes
