@@ -13,7 +13,8 @@ const QuestionSchema = new Schema(
     media: MediaSchema,
     type: {
       type: String,
-      enum: ['shortAns', 'para', 'options', 'file']
+      enum: ['shortAns', 'para', 'options', 'file'],
+      default: 'shortAns'
     },
     options: [
       {
