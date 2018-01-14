@@ -26,6 +26,36 @@
 
    * However, it is still mandatory to make the route using mongo id also. This will help admin to debug the application consistently.
 
+   * Query Parameter Format
+
+       /api/{entity}/:id?fields[self]=field1&fields[self]=field2&fields[{includedEntity}]=field3&include={includedEntity}
+
+       This results in 
+
+       ```js
+       {
+         fields: {
+           self: ['field1', 'field2'],
+           includedEntity: 'field3'
+         },
+         include: {includedEntity}
+       }
+       ```
+
+       Example : /api/events/5a17313e5134450a38febcbe?fields[self]=name&fields[_questions]=text&include=_questions&include=_winners
+
+       This results in 
+
+       ```js
+       {
+         fields: {
+           self: 'name',
+           _questions: 'text'
+         },
+         include: ['_questions', '_winners']
+       }
+       ```
+
 
 
 ## Entities
