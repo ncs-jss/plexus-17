@@ -1,9 +1,6 @@
 const { Joi } = require('express-joi');
 
-const { limit, skip, id } = require('./common.joi');
-
-const fields = Joi.types.any();
-const include = Joi.types.any();
+const { limit, skip, id, fields, include } = require('./common.joi');
 
 const list = (() => {
   const base = {
