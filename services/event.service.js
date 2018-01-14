@@ -1,4 +1,5 @@
 const Event = require('mongoose').model('Event');
+const _isString = require('lodash/isString');
 
 const mapPresetToFields = ({ preset, fields = '' }) => {
   const presetMap = {
@@ -9,6 +10,15 @@ const mapPresetToFields = ({ preset, fields = '' }) => {
   return (preset ? presetMap[preset] : fields).split(',');
 };
 
+const getPopulations = include => {
+  const allowedIncludes = ['_questions'];
+  if (_isString(include)) {
+    include = [include];
+  }
+  include = include.filter(includedField => allowedIncludes.includes(includedField));
+  return include.map(includedField => ({ path: includedField }));
+};
+
 module.exports = {
   list: async ({ limit = 10, skip = 0, preset, fields, include = [] }) => {
     const options = {};
@@ -16,9 +26,7 @@ module.exports = {
     options.skip = parseInt(skip);
 
     fields = mapPresetToFields({ preset, fields });
-
-    include = include.filter(includedField => ['_questions'].includes(includedField));
-    const populations = include.map(includedField => ({ path: includedField }));
+    const populations = getPopulations(include);
 
     return Event.find({}, fields, options).populate(populations);
   },
