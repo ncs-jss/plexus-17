@@ -42,7 +42,8 @@ const create = (() => {
       url: Joi.string().required()
     }),
     flag: Joi.types.boolean(),
-    weightage: Joi.types.number().required()
+    weightage: Joi.types.number().required(),
+    _event: Joi.types.String().required()
   };
   return {
     admin: Joi.object(base)

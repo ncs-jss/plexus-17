@@ -18,6 +18,8 @@ const questionValidator = (method, req, res, next) => (req, res, next) => {
   });
 };
 
+//remember to exclude the answer field for users. The answer should only be visible to admin and the event coordinator
+
 router
   .route('/')
   .get(questionValidator('list'), isAdmin, async (req, res) => {

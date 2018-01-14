@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const { ObjectId } = Schema;
 
 const MediaSchema = require('./schema/Media');
 const WinnerSchema = require('./schema/Winner');
@@ -50,6 +51,12 @@ const EventSchema = new Schema(
       enum: ['individual', 'society'],
       required: true
     },
+    _questions: [
+      {
+        type: ObjectId,
+        ref: 'Question'
+      }
+    ],
     winners: [WinnerSchema],
     media: [MediaSchema],
     prizes: {
