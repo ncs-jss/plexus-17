@@ -1,12 +1,33 @@
 const Question = require('mongoose').model('Question');
+const _isString = require('lodash/isString');
 
 const EventService = require('./event.service.js');
 
-const list = async () => {
-  return Question.find({});
+const getPopulations = ({ include = [], fields = {} }) => {
+  const allowedIncludes = ['_event'];
+  if (_isString(include)) {
+    include = [include];
+  }
+  include = include.filter(includedField => allowedIncludes.includes(includedField));
+  return include.map(includedField => ({ path: includedField, select: fields[includedField] }));
 };
 
-const get = async () => {};
+const list = async ({ limit = 10, skip = 0, fields = {}, include = [] }) => {
+  const options = {};
+  options.limit = parseInt(limit);
+  options.skip = parseInt(skip);
+
+  const populations = getPopulations({ include, fields });
+  return Question.find({}, fields.self, options).populate(populations);
+};
+
+const get = async (id, { query_field = '_id', fields = {}, include = [] }) => {
+  const query = {};
+  query[query_field] = id;
+
+  const populations = getPopulations({ include, fields });
+  return Question.findOne(query, fields.self).populate(populations);
+};
 
 const create = async (data, options = {}) => {
   const question = await new Question(data).save();

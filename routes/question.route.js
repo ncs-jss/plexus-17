@@ -21,6 +21,21 @@ const questionValidator = (method, req, res, next) => (req, res, next) => {
 //remember to exclude the answer field for users. The answer should only be visible to admin and the event coordinator
 
 router
+  .use('/:id', isValidId)
+  .route('/:id')
+  .get(questionValidator('get'), async (req, res) => {
+    let { id } = req.items;
+    try {
+      const question = await QuestionService.get(id, req.query);
+      res.send(question);
+    } catch (err) {
+      return res.status(500).send({
+        error: Errors.get
+      });
+    }
+  });
+
+router
   .route('/')
   .get(questionValidator('list'), isAdmin, async (req, res) => {
     try {
