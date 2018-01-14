@@ -1,3 +1,5 @@
+const { Joi } = require('express-joi');
+
 const { list: userListHandler, get: userGetHandler } = require('./handlers/user.handler');
 
 module.exports = test => {
@@ -42,11 +44,14 @@ module.exports = test => {
       userGetHandler(user._id, {
         fields: 'name'
       }).end((err, { body: userGet }) => {
-        assert.deepEquals(
-          Object.keys(userGet),
-          ['_id', 'name'],
-          `userGet with field name must have only fields _id and name`
+        const error = Joi.validate(
+          userGet,
+          Joi.object({
+            _id: Joi.types.string().required(),
+            name: Joi.types.string().required()
+          })
         );
+        assert.equals(error, null);
       });
     });
   });
