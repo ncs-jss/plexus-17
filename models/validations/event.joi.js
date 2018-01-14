@@ -2,7 +2,7 @@ const { Joi } = require('express-joi');
 
 const { limit, skip, id } = require('./common.joi');
 
-const fields = Joi.types.String();
+const fields = Joi.types.any();
 const include = Joi.types.any();
 
 const list = (() => {
@@ -22,7 +22,8 @@ const list = (() => {
 const get = (() => {
   const base = {
     id,
-    fields
+    fields,
+    include
   };
   return {
     public: Joi.object(base),
@@ -40,7 +41,8 @@ const create = (() => {
     endTime: Joi.types.date().required(),
     state: Joi.types.String().valid(['running', 'ended', 'toStart', 'blocked']),
     verified: Joi.types.boolean(),
-    flag: Joi.types.boolean()
+    flag: Joi.types.boolean(),
+    fields
   };
   return {
     admin: Joi.object(base)
