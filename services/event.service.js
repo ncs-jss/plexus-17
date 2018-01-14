@@ -10,16 +10,17 @@ const mapPresetToFields = ({ preset, fields = '' }) => {
 };
 
 module.exports = {
-  list: async (
-    options = {
-      limit: 10,
-      skip: 0
-    }
-  ) => {
-    options.limit = parseInt(options.limit);
-    options.skip = parseInt(options.skip);
-    fields = mapPresetToFields(options);
-    return Event.find({}, fields, options);
+  list: async ({ limit = 10, skip = 0, preset, fields, include = [] }) => {
+    const options = {};
+    options.limit = parseInt(limit);
+    options.skip = parseInt(skip);
+
+    fields = mapPresetToFields({ preset, fields });
+
+    include = include.filter(includedField => ['_questions'].includes(includedField));
+    const populations = include.map(includedField => ({ path: includedField }));
+
+    return Event.find({}, fields, options).populate(populations);
   },
   get: async (id, options) => {
     fields = mapPresetToFields(options);
@@ -51,5 +52,12 @@ module.exports = {
     //todo
     options.select = mapPresetToFields(options);
     return Event.findByIdAndRemove(id, options);
+  },
+  addQuestion: async ({ eventId, questionId }) => {
+    return Event.findByIdAndUpdate(eventId, {
+      $push: {
+        _questions: questionId
+      }
+    });
   }
 };

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const { ObjectId } = Schema;
 
 const MediaSchema = require('./schema/Media');
 
@@ -9,6 +10,10 @@ const QuestionSchema = new Schema(
       type: String,
       trim: true,
       required: true
+    },
+    _event: {
+      type: ObjectId,
+      ref: 'Event'
     },
     media: MediaSchema,
     type: {

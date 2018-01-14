@@ -42,6 +42,7 @@ router
 router
   .route('/')
   .get(eventValidator('list'), async (req, res) => {
+    console.log('req.query', req.query);
     try {
       const events = await EventService.list(req.items);
       return res.send(events);

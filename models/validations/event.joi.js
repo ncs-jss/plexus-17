@@ -3,12 +3,14 @@ const { Joi } = require('express-joi');
 const { limit, skip, id } = require('./common.joi');
 
 const fields = Joi.types.String();
+const include = Joi.types.array();
 
 const list = (() => {
   const base = {
     limit,
     skip,
-    fields
+    fields,
+    include
   };
   return {
     public: Joi.object(base),
@@ -19,7 +21,8 @@ const list = (() => {
 
 const get = (() => {
   const base = {
-    id
+    id,
+    fields
   };
   return {
     public: Joi.object(base),
