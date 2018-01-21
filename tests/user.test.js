@@ -1,6 +1,6 @@
 const { Joi } = require('express-joi');
 
-const { list: userListHandler, get: userGetHandler } = require('./handlers/user.handler');
+const { list: userListHandler, get: userGetHandler } = require('./handlers/api.handler')('users');
 
 module.exports = test => {
   test('GET /users', assert => {
@@ -22,7 +22,7 @@ module.exports = test => {
         query_field: 'username'
       }).end((err, { body: userGet }) => {
         assert.comment("Using user's username");
-        assert.deepEquals(userGet, user, 'userGet must match the one from user list');
+        assert.deepEquals(userGet, user, 'userGet must match the one from user list using username');
       });
 
       const presetMap = {

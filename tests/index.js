@@ -8,3 +8,4 @@ test
 
 require('./user.test')(test);
 require('./event.test')(test);
+require('./question.test')(test);
