@@ -1,6 +1,6 @@
 const { Joi } = require('express-joi');
 
-const { list: eventListHandler, get: eventGetHandler } = require('./handlers/event.handler');
+const { list: eventListHandler, get: eventGetHandler } = require('./handlers/api.handler')('events');
 
 module.exports = test => {
   test('GET /events', assert => {
