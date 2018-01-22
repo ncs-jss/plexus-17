@@ -1,4 +1,4 @@
-const { Joi } = require('express-joi');
+const Joi = require('joi');
 
 const { list: userListHandler, get: userGetHandler } = require('./handlers/api.handler')('users');
 
@@ -44,11 +44,11 @@ module.exports = test => {
       userGetHandler(user._id, {
         fields: 'name'
       }).end((err, { body: userGet }) => {
-        const error = Joi.validate(
+        const { error } = Joi.validate(
           userGet,
           Joi.object({
-            _id: Joi.types.string().required(),
-            name: Joi.types.string().required()
+            _id: Joi.string().required(),
+            name: Joi.string().required()
           })
         );
         assert.equals(error, null);

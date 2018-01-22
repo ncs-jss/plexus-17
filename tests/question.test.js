@@ -1,4 +1,4 @@
-const { Joi } = require('express-joi');
+const Joi = require('joi');
 
 const { list: questionListHandler, get: questionGetHandler } = require('./handlers/api.handler')('questions');
 
@@ -17,17 +17,17 @@ module.exports = test => {
       },
       include: ['_event']
     }).end((err, { body: questionList }) => {
-      questionList.reduce((acc, question) => {
-        const error = Joi.validate(
-          question,
+      const { error } = Joi.validate(
+        questionList,
+        Joi.array().items(
           Joi.object({
-            _id: Joi.types.string().required(),
-            text: Joi.types.string().required(),
-            _event: Joi.types.object().required()
+            _id: Joi.string().required(),
+            text: Joi.string().required(),
+            _event: Joi.object().required()
           })
-        );
-        assert.equals(error, null);
-      });
+        )
+      );
+      assert.equals(error, null);
       assert.end();
     });
   });
