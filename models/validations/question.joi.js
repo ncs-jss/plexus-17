@@ -1,4 +1,4 @@
-const { Joi } = require('express-joi');
+const Joi = require('joi');
 
 const { limit, skip, id, fields, include } = require('./common.joi');
 
@@ -31,20 +31,19 @@ const get = (() => {
 
 const create = (() => {
   const base = {
-    text: Joi.types.String().required(),
-    answer: Joi.types.String().required(),
-    type: Joi.types
-      .String()
+    text: Joi.string().required(),
+    answer: Joi.string().required(),
+    type: Joi.string()
       .valid(['shortAns', 'para', 'options', 'file'])
       .required(),
-    options: Joi.types.array().min(1),
+    options: Joi.array().min(1),
     media: Joi.object({
       type: Joi.string(),
       url: Joi.string().required()
     }),
-    flag: Joi.types.boolean(),
-    weightage: Joi.types.number().required(),
-    _event: Joi.types.String().required()
+    flag: Joi.boolean(),
+    weightage: Joi.number().required(),
+    _event: Joi.string().required()
   };
   return {
     admin: Joi.object(base)
