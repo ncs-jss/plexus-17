@@ -1,4 +1,4 @@
-const { Joi } = require('express-joi');
+const Joi = require('joi');
 
 const { list: eventListHandler, get: eventGetHandler } = require('./handlers/api.handler')('events');
 
@@ -17,19 +17,25 @@ module.exports = test => {
       },
       include: ['_questions']
     }).end((err, { body: eventList }) => {
-      console.log('testsbdskb', eventList[0]._questions[0]);
-      eventList.reduce((acc, event) => {
-        const error = Joi.validate(
-          event,
-          Joi.object({
-            _id: Joi.types.string().required(),
-            name: Joi.types.string().required(),
-            winners: Joi.types.array().required(),
-            _questions: Joi.types.array().required()
+      const { error } = Joi.validate(
+        eventList,
+        Joi.array().items(
+          Joi.object().keys({
+            _id: Joi.string().required(),
+            name: Joi.string().required(),
+            winners: Joi.array().required(),
+            _questions: Joi.array()
+              .items(
+                Joi.object().keys({
+                  _id: Joi.string().required(),
+                  answer: Joi.string().required()
+                })
+              )
+              .required()
           })
-        );
-        assert.equals(error, null);
-      });
+        )
+      );
+      assert.equals(error, null);
       assert.end();
     });
   });
@@ -41,13 +47,13 @@ module.exports = test => {
       },
       include: ['_questions']
     }).end((err, { body: eventGet }) => {
-      const error = Joi.validate(
+      const { error } = Joi.validate(
         eventGet,
-        Joi.object({
-          _id: Joi.types.string().required(),
-          name: Joi.types.string().required(),
-          winners: Joi.types.array().required(),
-          _questions: Joi.types.array().required()
+        Joi.object().keys({
+          _id: Joi.string().required(),
+          name: Joi.string().required(),
+          winners: Joi.array().required(),
+          _questions: Joi.array().required()
         })
       );
       assert.equals(error, null);
