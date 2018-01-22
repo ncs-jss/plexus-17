@@ -1,20 +1,18 @@
-const { Joi } = require('express-joi');
+const Joi = require('joi');
 
 module.exports = {
-  limit: Joi.types
-    .Number()
+  limit: Joi.number()
     .integer()
     .min(1)
     .max(25)
     .required(),
-  skip: Joi.types
-    .Number()
+  skip: Joi.number()
     .integer()
     .min(0)
     .max(25)
     .required(),
-  id: Joi.types.String().required(),
-  query_field: Joi.types.String().valid(['_id', 'username']),
-  fields: Joi.types.any(),
-  include: Joi.types.any()
+  id: Joi.string().required(),
+  query_field: Joi.string().valid(['_id', 'username']),
+  fields: Joi.any(),
+  include: Joi.any()
 };

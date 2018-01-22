@@ -1,4 +1,4 @@
-const { Joi } = require('express-joi');
+const Joi = require('joi');
 
 const { limit, skip, id, fields, include } = require('./common.joi');
 
@@ -21,7 +21,7 @@ const get = (() => {
     id,
     fields,
     include,
-    query_field: Joi.types.String()
+    query_field: Joi.string()
   };
   return {
     public: Joi.object(base),
@@ -32,14 +32,14 @@ const get = (() => {
 
 const create = (() => {
   const base = {
-    name: Joi.types.String().required(),
-    description: Joi.types.String().required(),
-    enquiry: Joi.types.String().required(),
-    startTime: Joi.types.date().required(),
-    endTime: Joi.types.date().required(),
-    state: Joi.types.String().valid(['running', 'ended', 'toStart', 'blocked']),
-    verified: Joi.types.boolean(),
-    flag: Joi.types.boolean(),
+    name: Joi.string().required(),
+    description: Joi.string().required(),
+    enquiry: Joi.string().required(),
+    startTime: Joi.date().required(),
+    endTime: Joi.date().required(),
+    state: Joi.string().valid(['running', 'ended', 'toStart', 'blocked']),
+    verified: Joi.boolean(),
+    flag: Joi.boolean(),
     fields
   };
   return {

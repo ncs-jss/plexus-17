@@ -1,9 +1,9 @@
-const { Joi } = require('express-joi');
+const Joi = require('joi');
 
 const { limit, skip, id, query_field } = require('./common.joi');
 
-const preset = Joi.types.String().valid(['profile', 'imp', 'short']);
-const fields = Joi.types.String();
+const preset = Joi.string().valid(['profile', 'imp', 'short']);
+const fields = Joi.string();
 
 const list = (() => {
   const base = {
@@ -33,13 +33,12 @@ const get = (() => {
 
 const create = (() => {
   const base = {
-    name: Joi.types.String().required(),
-    email: Joi.types
-      .String()
+    name: Joi.string().required(),
+    email: Joi.string()
       .email()
       .required(),
-    role: Joi.types.String().valid(['admin', 'manager', 'editor', 'user']),
-    verified: Joi.types.boolean(),
+    role: Joi.string().valid(['admin', 'manager', 'editor', 'user']),
+    verified: Joi.boolean(),
     fields,
     preset
   };
@@ -51,9 +50,8 @@ const create = (() => {
 const update = (() => {
   const base = {
     id,
-    username: Joi.types.String(),
-    phoneNo: Joi.types
-      .Number()
+    username: Joi.string(),
+    phoneNo: Joi.number()
       .integer()
       .min(10)
       .max(10),
@@ -61,14 +59,14 @@ const update = (() => {
     preset
   };
   const adminOnly = {
-    admNo: Joi.types.String(),
-    token: Joi.types.String(),
-    societyId: Joi.types.String(),
-    arenaId: Joi.types.String(),
-    role: Joi.types.String().valid(['admin', 'manager', 'editor', 'user']),
-    type: Joi.types.String().valid(['individual', 'societyMember', 'societyExec']),
-    verified: Joi.types.boolean(),
-    flag: Joi.types.boolean()
+    admNo: Joi.string(),
+    token: Joi.string(),
+    societyId: Joi.string(),
+    arenaId: Joi.string(),
+    role: Joi.string().valid(['admin', 'manager', 'editor', 'user']),
+    type: Joi.string().valid(['individual', 'societyMember', 'societyExec']),
+    verified: Joi.boolean(),
+    flag: Joi.boolean()
   };
   return {
     user: Joi.object(base),

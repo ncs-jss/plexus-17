@@ -25,7 +25,6 @@
     "compression": "^1.7.1",
     "cookie-session": "^1.3.1",
     "express": "^4.15.4",
-    "express-joi": "^0.3.1",
     "joi": "^13.1.1",
     "lodash": "^4.17.4",
     "mongoose": "^4.11.10",

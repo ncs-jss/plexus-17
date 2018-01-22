@@ -1,20 +1,20 @@
 const router = require('express').Router();
-const { joiValidate } = require('express-joi');
+const Joi = require('joi');
 
 const questionJoi = require('../models/validations/question.joi');
+const joiValidator = require('../middlewares/joiValidator.mw');
 const { isLogin, isAdmin } = require('../middlewares/roleManager.mw');
 const isValidId = require('../middlewares/validId.mw');
 const QuestionService = require('../services/question.service');
 const Errors = require('../services/lang/Errors');
 
-const questionValidator = (method, req, res, next) => (req, res, next) => {
-  const role = req.user ? req.user.role : 'public';
-  const validationSchema = questionJoi[method][role];
-  if (validationSchema) {
-    return joiValidate(validationSchema)(req, res, next);
+const questionValidator = method => {
+  const questionSchema = questionJoi[method];
+  if (questionSchema) {
+    return joiValidator(questionSchema);
   }
-  return res.status(401).send({
-    error: `Not allowed for ${role}`
+  return res.status(404).send({
+    error: `${method} on questions not allowed`
   });
 };
 
