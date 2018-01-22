@@ -8,7 +8,7 @@ const getPopulations = ({ include = [], fields = {} }) => {
   if (_isString(include)) {
     include = [include];
   }
-  include = include.filter(includedField => allowedIncludes.includes(includedField));
+  include = allowedIncludes.filter(allowedField => include.includes(allowedField)); //to check valid include
   return include.map(includedField => ({ path: includedField, select: fields[includedField] }));
 };
 

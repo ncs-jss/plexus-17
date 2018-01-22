@@ -12,16 +12,20 @@ module.exports = test => {
       limit: 2,
       skip: 0,
       fields: {
-        self: ['name', 'winners']
-      }
+        self: ['name', 'winners'],
+        _questions: ['answer']
+      },
+      include: ['_questions']
     }).end((err, { body: eventList }) => {
+      console.log('testsbdskb', eventList[0]._questions[0]);
       eventList.reduce((acc, event) => {
         const error = Joi.validate(
           event,
           Joi.object({
             _id: Joi.types.string().required(),
             name: Joi.types.string().required(),
-            winners: Joi.types.array().required()
+            winners: Joi.types.array().required(),
+            _questions: Joi.types.array().required()
           })
         );
         assert.equals(error, null);

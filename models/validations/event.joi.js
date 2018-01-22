@@ -20,7 +20,8 @@ const get = (() => {
   const base = {
     id,
     fields,
-    include
+    include,
+    query_field: Joi.types.String()
   };
   return {
     public: Joi.object(base),
