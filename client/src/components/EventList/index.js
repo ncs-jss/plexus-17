@@ -1,44 +1,40 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import EventItem from './EventItem';
 
-class Event extends Component {
+import { listEvent } from '../../actions/event.action';
+
+class EventList extends Component {
   constructor(props) {
     super(props);
-    this.eventLinks = [
-      {
-        id: 0,
-        text: 'Errata',
-        url: '/errata'
-      },
-      {
-        id: 1,
-        text: 'Sherlocked',
-        url: '/sherlocked'
-      },
-      {
-        id: 2,
-        text: 'Khoj',
-        url: '/khoj'
+    this.props.listEvent({
+      limit: 6,
+      fields: {
+        self: ['name', 'description', 'state']
       }
-    ];
+    });
     const { match } = props;
     this.baseUrl = match.url + 'events';
   }
 
   renderEventItems() {
-    return this.eventLinks.map(event => {
-      return <EventItem baseUrl={this.baseUrl} event={event} key={event.id} />;
+    return this.props.event.map(event => {
+      return <EventItem baseUrl={this.baseUrl} event={event} key={event._id} />;
     });
   }
 
   render() {
     return (
-      <div>
-        <div className="row">{this.renderEventItems()}</div>
+      <div style={{ width: '100%' }}>
+        <div className="row"> {this.renderEventItems()} </div>{' '}
       </div>
     );
   }
 }
 
-export default Event;
+const mapStateToProps = ({ event }) => ({ event });
+
+export default connect(mapStateToProps, { listEvent })(EventList);
+
+// export default EventList;

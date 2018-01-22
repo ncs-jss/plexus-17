@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.16.2",
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",
     "react": "^16.0.0-alpha.13",
@@ -13,7 +12,8 @@
     "react-scripts": "1.0.10",
     "redux": "^3.7.1",
     "redux-form": "^7.0.4",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "superagent": "^3.8.2"
   },
   "scripts": {
     "start": "react-scripts start",
