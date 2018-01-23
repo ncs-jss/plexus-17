@@ -1,11 +1,7 @@
 const Event = require('mongoose').model('Event');
-const _isString = require('lodash/isString');
 
 const getPopulations = ({ include, fields = {} }) => {
   const allowedIncludes = ['_questions'];
-  if (_isString(include)) {
-    include = [include];
-  }
   include = allowedIncludes.filter(allowedField => include.includes(allowedField)); //to check valid include
   return include.map(includedField => ({ path: includedField, select: fields[includedField] }));
 };
