@@ -4,7 +4,11 @@ const { limit, skip, id } = require('./common.joi');
 
 const fields = Joi.object().keys({
   self: Joi.array()
-    .items(Joi.string().invalid('answer'))
+    .items(
+      Joi.string()
+        .alphanum()
+        .invalid('answer')
+    ) //alphanum prevents +answer
     .single(),
   _event: Joi.array()
     .items(Joi.string().invalid('_question'))

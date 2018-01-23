@@ -8,8 +8,10 @@ const getPopulations = ({ include = [], fields = {} }) => {
   return include.map(includedField => ({ path: includedField, select: fields[includedField] }));
 };
 
-const list = async ({ limit = 10, skip = 0, fields = {}, include = [] }) => {
-  const options = {};
+const list = async ({ limit = 10, skip = 0, fields = {}, include = [], lean = false }) => {
+  const options = {
+    lean
+  };
   options.limit = parseInt(limit);
   options.skip = parseInt(skip);
 
@@ -17,12 +19,16 @@ const list = async ({ limit = 10, skip = 0, fields = {}, include = [] }) => {
   return Question.find({}, fields.self, options).populate(populations);
 };
 
-const get = async (id, { query_field = '_id', fields = {}, include = [] }) => {
+const get = async (id, { query_field = '_id', fields = {}, include = [], lean = false }) => {
+  const options = {
+    lean
+  };
+
   const query = {};
   query[query_field] = id;
 
   const populations = getPopulations({ include, fields });
-  return Question.findOne(query, fields.self).populate(populations);
+  return Question.findOne(query, fields.self, options).populate(populations);
 };
 
 const create = async (data, options = {}) => {

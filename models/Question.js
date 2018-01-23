@@ -33,6 +33,7 @@ const QuestionSchema = new Schema(
     },
     answer: {
       type: String,
+      select: false,
       trim: true,
       lowercase: true,
       required: true

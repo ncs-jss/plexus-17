@@ -46,6 +46,7 @@ router
       const events = await EventService.list(req.items);
       return res.send(events);
     } catch (err) {
+      console.log('err', err);
       return res.status(500).send({
         error: Errors.list
       });
