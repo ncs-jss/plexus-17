@@ -8,10 +8,11 @@ const joiValidator = schema => (req, res, next) => {
   const schemaForRole = schema[role];
 
   const data = { ...req.query, ...req.params };
+
   const { error, value } = Joi.validate(data, schemaForRole);
   if (error) {
     return res.status(400).send({
-      error: `Invalid Request`
+      error: error.details[0].message
     });
   }
   req.items = value;
