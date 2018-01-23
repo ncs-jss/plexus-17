@@ -42,6 +42,7 @@ router
       const questions = await QuestionService.list(req.items);
       return res.send(questions);
     } catch (err) {
+      console.log('err', err);
       return res.status(500).send({
         error: Errors.list
       });

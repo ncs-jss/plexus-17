@@ -7,7 +7,11 @@ const fields = Joi.object().keys({
     .items(Joi.string())
     .single(),
   _questions: Joi.array()
-    .items(Joi.string().invalid('answer'))
+    .items(
+      Joi.string()
+        .alphanum()
+        .invalid('answer')
+    ) //alphanum prevents +answer
     .single()
 });
 
