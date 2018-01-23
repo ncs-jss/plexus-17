@@ -1,20 +1,14 @@
 const Question = require('mongoose').model('Question');
 
 const EventService = require('./event.service.js');
-
-const mapPresetToProj = ({ preset, fields }) => {
-  const presetMap = {
+const mapPresetToProj = require('../utilities/mapPresetToProj.util')({
+  presetMap: {
     short: ['text', 'type', 'options']
-  };
-
-  return presetMap[preset] || fields.self;
-};
-
-const getPopulations = ({ include = [], fields = {} }) => {
-  const allowedIncludes = ['_event'];
-  include = allowedIncludes.filter(allowedField => include.includes(allowedField)); //to check valid include
-  return include.map(includedField => ({ path: includedField, select: fields[includedField] }));
-};
+  }
+});
+const getPopulations = require('../utilities/getPopulations.util')({
+  allowedIncludes: ['_event']
+});
 
 const list = async ({ limit = 10, skip = 0, fields = {}, include = [], lean = false, preset = '' }) => {
   const options = {
