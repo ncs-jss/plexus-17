@@ -2,21 +2,30 @@ const Question = require('mongoose').model('Question');
 
 const EventService = require('./event.service.js');
 
+const mapPresetToProj = ({ preset, fields }) => {
+  const presetMap = {
+    short: ['text', 'type', 'options']
+  };
+
+  return presetMap[preset] || fields.self;
+};
+
 const getPopulations = ({ include = [], fields = {} }) => {
   const allowedIncludes = ['_event'];
   include = allowedIncludes.filter(allowedField => include.includes(allowedField)); //to check valid include
   return include.map(includedField => ({ path: includedField, select: fields[includedField] }));
 };
 
-const list = async ({ limit = 10, skip = 0, fields = {}, include = [], lean = false }) => {
+const list = async ({ limit = 10, skip = 0, fields = {}, include = [], lean = false, preset = '' }) => {
   const options = {
+    limit,
+    skip,
     lean
   };
-  options.limit = parseInt(limit);
-  options.skip = parseInt(skip);
 
+  const projections = mapPresetToProj({ preset, fields });
   const populations = getPopulations({ include, fields });
-  return Question.find({}, fields.self, options).populate(populations);
+  return Question.find({}, projections, options).populate(populations);
 };
 
 const get = async (id, { query_field = '_id', fields = {}, include = [], lean = false }) => {
@@ -27,8 +36,9 @@ const get = async (id, { query_field = '_id', fields = {}, include = [], lean = 
   const query = {};
   query[query_field] = id;
 
+  const projections = mapPresetToProj({ preset, fields });
   const populations = getPopulations({ include, fields });
-  return Question.findOne(query, fields.self, options).populate(populations);
+  return Question.findOne(query, projections, options).populate(populations);
 };
 
 const create = async (data, options = {}) => {

@@ -2,6 +2,8 @@ const Joi = require('joi');
 
 const { limit, skip, id } = require('./common.joi');
 
+const preset = Joi.string().valid('short');
+
 const fields = Joi.object().keys({
   self: Joi.array()
     .items(Joi.string())
@@ -20,30 +22,36 @@ const include = Joi.array()
   .single();
 
 const list = (() => {
-  const base = {
-    limit,
-    skip,
-    fields,
-    include
-  };
+  const base = Joi.object()
+    .keys({
+      limit,
+      skip,
+      fields,
+      include,
+      preset
+    })
+    .without('preset', 'fields');
   return {
-    public: Joi.object(base),
-    user: Joi.object(base),
-    admin: Joi.object(base)
+    public: base,
+    user: base,
+    admin: base
   };
 })();
 
 const get = (() => {
-  const base = {
-    id,
-    fields,
-    include,
-    query_field: Joi.string().valid(['_id', 'name'])
-  };
+  const base = Joi.object()
+    .keys({
+      id,
+      fields,
+      include,
+      preset,
+      query_field: Joi.string().valid(['_id', 'name'])
+    })
+    .without('preset', 'fields');
   return {
-    public: Joi.object(base),
-    user: Joi.object(base),
-    admin: Joi.object(base)
+    public: base,
+    user: base,
+    admin: base
   };
 })();
 
