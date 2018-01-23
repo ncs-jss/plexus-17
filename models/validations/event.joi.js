@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const { limit, skip, id, include } = require('./common.joi');
+const { limit, skip, id } = require('./common.joi');
 
 const fields = Joi.object().keys({
   self: Joi.array()
@@ -10,6 +10,10 @@ const fields = Joi.object().keys({
     .items(Joi.string().invalid('answer'))
     .single()
 });
+
+const include = Joi.array()
+  .items(Joi.string().valid('_questions'))
+  .single();
 
 const list = (() => {
   const base = {

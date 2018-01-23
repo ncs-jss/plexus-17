@@ -11,6 +11,5 @@ module.exports = {
     .min(0)
     .max(25)
     .required(),
-  id: Joi.string().required(),
-  include: Joi.any()
+  id: Joi.string().required()
 };
