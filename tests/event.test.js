@@ -13,7 +13,7 @@ module.exports = test => {
       skip: 0,
       fields: {
         self: ['name', 'winners'],
-        _questions: ['answer']
+        _questions: ['text']
       },
       include: ['_questions']
     }).end((err, { body: eventList }) => {
@@ -28,7 +28,7 @@ module.exports = test => {
               .items(
                 Joi.object().keys({
                   _id: Joi.string().required(),
-                  answer: Joi.string().required()
+                  text: Joi.string().required()
                 })
               )
               .required()

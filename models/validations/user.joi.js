@@ -1,8 +1,19 @@
 const Joi = require('joi');
 
-const { limit, skip, id, query_field } = require('./common.joi');
+const { limit, skip, id } = require('./common.joi');
+
+const query_field = Joi.string().valid(['_id', 'username']);
 
 const preset = Joi.string().valid(['profile', 'imp', 'short']);
+
+// const field = Joi.array().items(Joi.string()).single();
+
+// const fields = Joi.object().keys({
+//   self: field,
+//   _society: field,
+//   _arena: field
+// })
+
 const fields = Joi.string();
 
 const list = (() => {

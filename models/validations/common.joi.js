@@ -12,7 +12,5 @@ module.exports = {
     .max(25)
     .required(),
   id: Joi.string().required(),
-  query_field: Joi.string().valid(['_id', 'username']),
-  fields: Joi.any(),
   include: Joi.any()
 };
