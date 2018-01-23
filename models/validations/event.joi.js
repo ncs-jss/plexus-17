@@ -44,7 +44,8 @@ const get = (() => {
       id,
       fields,
       include,
-      preset
+      preset,
+      query_field: Joi.string().valid(['_id', 'name'])
     })
     .without('preset', 'fields');
   return {
