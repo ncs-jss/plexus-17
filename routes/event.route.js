@@ -27,6 +27,7 @@ router
       const event = await EventService.get(id, req.query);
       res.send(event);
     } catch (err) {
+      console.log('err', err);
       return res.status(500).send({
         error: Errors.get
       });
