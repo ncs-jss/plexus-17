@@ -1,3 +1,3 @@
-module.exports = ({ presetMap }) => ({ preset, fields }) => {
+module.exports = ({ presetMap }) => ({ preset = '', fields }) => {
   return presetMap[preset] || fields.self;
 };
