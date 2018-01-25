@@ -42,7 +42,9 @@ module.exports = test => {
         });
       });
       userGetHandler(user._id, {
-        fields: 'name'
+        fields: {
+          self: 'name'
+        }
       }).end((err, { body: userGet }) => {
         const { error } = Joi.validate(
           userGet,
