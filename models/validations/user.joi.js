@@ -6,39 +6,45 @@ const query_field = Joi.string().valid(['_id', 'username']);
 
 const preset = Joi.string().valid(['profile', 'imp', 'short']);
 
-// const field = Joi.array().items(Joi.string()).single();
+const field = Joi.array()
+  .items(Joi.string())
+  .single();
 
-// const fields = Joi.object().keys({
-//   self: field,
-//   _society: field,
-//   _arena: field
-// })
+const fields = Joi.object().keys({
+  self: field,
+  _society: field,
+  _arena: field
+});
 
-const fields = Joi.string();
+// const fields = Joi.string();
 
 const list = (() => {
-  const base = {
-    limit,
-    skip,
-    fields,
-    preset
-  };
+  const base = Joi.object()
+    .keys({
+      limit,
+      skip,
+      fields,
+      preset
+    })
+    .without('preset', 'fields');
   return {
-    user: Joi.object(base),
-    admin: Joi.object(base)
+    user: base,
+    admin: base
   };
 })();
 
 const get = (() => {
-  const base = {
-    id,
-    query_field,
-    fields,
-    preset
-  };
+  const base = Joi.object()
+    .keys({
+      id,
+      query_field,
+      fields,
+      preset
+    })
+    .without('preset', 'fields');
   return {
-    user: Joi.object(base),
-    admin: Joi.object(base)
+    user: base,
+    admin: base
   };
 })();
 
@@ -54,7 +60,9 @@ const create = (() => {
     preset
   };
   return {
-    admin: Joi.object(base)
+    admin: Joi.object()
+      .keys(base)
+      .without('preset', 'fields')
   };
 })();
 
@@ -80,8 +88,8 @@ const update = (() => {
     flag: Joi.boolean()
   };
   return {
-    user: Joi.object(base),
-    admin: Joi.object(Object.assign(base, adminOnly))
+    user: Joi.object(base).without('preset', 'fields'),
+    admin: Joi.object(Object.assign(base, adminOnly)).without('preset', 'fields')
   };
 })();
 
@@ -92,7 +100,7 @@ const remove = (() => {
     preset
   };
   return {
-    admin: Joi.object(base)
+    admin: Joi.object(base).without('preset', 'fields')
   };
 })();
 

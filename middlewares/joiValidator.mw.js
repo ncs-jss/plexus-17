@@ -7,7 +7,7 @@ const joiValidator = schema => (req, res, next) => {
   const role = req.user ? req.user.role : 'public';
   const schemaForRole = schema[role];
 
-  const data = { ...req.query, ...req.params };
+  const data = { ...req.query, ...req.params, ...req.body };
 
   const { error, value } = Joi.validate(data, schemaForRole);
   if (error) {
