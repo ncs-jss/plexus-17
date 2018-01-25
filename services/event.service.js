@@ -10,7 +10,7 @@ const getPopulations = require('../utilities/getPopulations.util')({
 });
 
 module.exports = {
-  list: async ({ limit = 10, skip = 0, fields = {}, include = [], preset = '' }) => {
+  list: async ({ limit = 10, skip = 0, fields = {}, include = [], preset = '' } = {}) => {
     const options = {
       limit,
       skip
@@ -20,7 +20,7 @@ module.exports = {
     const populations = getPopulations({ include, fields });
     return Event.find({}, projections, options).populate(populations);
   },
-  get: async (id, { query_field = '_id', fields = {}, include = [], preset = '' }) => {
+  get: async (id, { query_field = '_id', fields = {}, include = [], preset = '' } = {}) => {
     const query = {};
     query[query_field] = id;
 
@@ -28,7 +28,7 @@ module.exports = {
     const populations = getPopulations({ include, fields });
     return Event.findOne(query, projections).populate(populations);
   },
-  create: async (data, { fields = {} }) => {
+  create: async (data, { fields = {} } = {}) => {
     const existingEvent = await Event.findOne(
       {
         name: data.name
@@ -40,20 +40,20 @@ module.exports = {
     }
     return new Event(data).save();
   },
-  update: async (id, data, { fields = {} }) => {
+  update: async (id, data, { fields = {} } = {}) => {
     //todo
     const options = {};
     options.fields = fields.self;
     options.new = true;
     return Event.findByIdAndUpdate(id, { $set: data }, options);
   },
-  remove: async (id, { fields = {} }) => {
+  remove: async (id, { fields = {} } = {}) => {
     //todo
     const options = {};
     options.select = fields.self;
     return Event.findByIdAndRemove(id, options);
   },
-  addQuestion: async ({ eventId, questionId }) => {
+  addQuestion: async ({ eventId, questionId } = {}) => {
     return Event.findByIdAndUpdate(eventId, {
       $push: {
         _questions: questionId
