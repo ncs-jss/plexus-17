@@ -10,7 +10,7 @@ const getPopulations = require('../utilities/getPopulations.util')({
   allowedIncludes: ['_event']
 });
 
-const list = async ({ limit = 10, skip = 0, fields = {}, include = [], lean = false, preset = '' }) => {
+const list = async ({ limit = 10, skip = 0, fields = {}, include = [], lean = false, preset = '' } = {}) => {
   const options = {
     limit,
     skip,
@@ -22,7 +22,7 @@ const list = async ({ limit = 10, skip = 0, fields = {}, include = [], lean = fa
   return Question.find({}, projections, options).populate(populations);
 };
 
-const get = async (id, { query_field = '_id', fields = {}, include = [], lean = false }) => {
+const get = async (id, { query_field = '_id', fields = {}, include = [], lean = false } = {}) => {
   const options = {
     lean
   };
@@ -35,7 +35,7 @@ const get = async (id, { query_field = '_id', fields = {}, include = [], lean = 
   return Question.findOne(query, projections, options).populate(populations);
 };
 
-const create = async (data, options = {}) => {
+const create = async (data, options = ({} = {})) => {
   const question = await new Question(data).save();
   const eventId = data._event;
   const questionId = question._id;
