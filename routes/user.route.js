@@ -3,7 +3,7 @@ const Joi = require('joi');
 
 const userJoi = require('../models/validations/user.joi');
 const joiValidator = require('../middlewares/joiValidator.mw');
-const { isLogin, isAdmin, isAdminOrSelf, isSelf } = require('../middlewares/roleManager.mw');
+const { isLogin, isAdmin, isAdminOrSelf } = require('../middlewares/roleManager.mw');
 const isValidId = require('../middlewares/validId.mw');
 const UserService = require('../services/user.service');
 const Errors = require('../services/lang/Errors');
@@ -57,7 +57,7 @@ router
 
 // Admin Routes
 router
-  .use('/', isLogin, isAdmin)
+  .use('/', isAdmin)
   .route('/')
   .get(userValidator('list'), async (req, res) => {
     try {

@@ -1,75 +1,84 @@
 const isFunction = require('lodash/isFunction');
 
-function isRole(role, req, res, next) {
+const isLogin = (req, res, next) => {
   const isMw = isFunction(next);
-  if (!(req.user && req.user.role === role)) {
-    if (isMw) {
-      return res.status(401).send({
-        error: `You are not logged in as ${role}!`
-      });
+  const cond = req.user;
+  if (isMw) {
+    if (cond) {
+      return next();
+    }
+    return res.status(401).send({
+      error: 'You are not Logged In!'
+    });
+  } else {
+    if (cond) {
+      return true;
     }
     return false;
   }
+};
+
+const isRole = ({ role }) => (req, res, next) => {
+  const isMw = isFunction(next);
+  const cond = isLogin(req) && req.user.role === role;
   if (isMw) {
-    return next();
+    if (cond) {
+      return next();
+    }
+    return res.status(401).send({
+      error: `You are not logged in as ${role}!`
+    });
+  } else {
+    if (cond) {
+      return true;
+    }
+    return false;
   }
-  return true;
-}
+};
+
+const isSelf = (req, res, next) => {
+  const isMw = isFunction(next);
+  const cond = isLogin(req) && req.user[req.items.query_field || 'id'] === req.items.id;
+  if (isMw) {
+    if (cond) {
+      return next();
+    }
+    return res.status(403).send({
+      error: "You don't have the permission to do this"
+    });
+  } else {
+    if (cond) {
+      return true;
+    }
+    return false;
+  }
+};
+
+const isRoleOrSelf = ({ role }) => (req, res, next) => {
+  const isMw = isFunction(next);
+  const cond = isSelf(req) || isRole(role)(req);
+  if (isMw) {
+    if (cond) {
+      return next();
+    }
+    return res.status(403).send({
+      error: "You don't have the permission to do this"
+    });
+  } else {
+    if (cond) {
+      return true;
+    }
+    return false;
+  }
+};
 
 module.exports = {
-  isLogin(req, res, next) {
-    const isMw = isFunction(next);
-    if (!req.user) {
-      if (isMw) {
-        return res.status(401).send({
-          error: 'You are not Logged In!'
-        });
-      }
-      return false;
-    }
-    if (isMw) {
-      return next();
-    }
-    return true;
-  },
+  isLogin,
   isRole,
-  isAdmin(...args) {
-    return isRole('admin', ...args);
-  },
-  isManager(...args) {
-    return isRole('manager', ...args);
-  },
-  isEditor(...args) {
-    return isRole('editor', ...args);
-  },
-  isSelf(req, res, next) {
-    const isMw = isFunction(next);
-    if (req.user.id !== req.items.id) {
-      if (isMw) {
-        return res.status(403).send({
-          error: "You don't have the permission to do this"
-        });
-      }
-      return false;
-    }
-    if (isMw) {
-      return next();
-    }
-    return true;
-  },
-  isAdminOrSelf(req, res, next) {
-    const isMw = isFunction(next);
-    if (req.user.role !== 'admin' && req.user.id !== req.items.id) {
-      if (isMw) {
-        return res.status(403).send({
-          error: "You don't have the permission to do this"
-        });
-      }
-      return false;
-    }
-    if (isMw) {
-      return next();
-    }
-    return true;
-  }
+  isAdmin: isRole({ role: 'admin' }),
+  isManager: isRole({ role: 'manager' }),
+  isEditor: isRole({ role: 'editor' }),
+  isSelf,
+  isRoleOrSelf,
+  isAdminOrSelf: isRoleOrSelf({ role: 'admin' })
 };
