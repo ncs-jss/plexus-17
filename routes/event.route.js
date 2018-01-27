@@ -5,6 +5,8 @@ const eventJoi = require('../models/validations/event.joi');
 const joiValidator = require('../middlewares/joiValidator.mw');
 const { isLogin, isAdmin } = require('../middlewares/roleManager.mw');
 const isValidId = require('../middlewares/validId.mw');
+const User = require('mongoose').model('User');
+const Arena = require('mongoose').model('Arena');
 const EventService = require('../services/event.service');
 const Errors = require('../services/lang/Errors');
 
@@ -39,6 +41,36 @@ router
   .delete(eventValidator('remove'), async (req, res) => {
     //todo
   });
+
+router.post('/:id/participate', isLogin, async (req, res) => {
+  const eventId = req.params.id;
+  const userId = req.user.id;
+  const existingArena = await Arena.findOne(
+    {
+      _event: eventId
+    },
+    {
+      lean: true
+    }
+  );
+  if (existingArena) {
+    return res.status(403).send({
+      error: 'Arena for this event already exists'
+    });
+  }
+  const arena = new Arena({
+    _event: eventId,
+    _user: userId
+  });
+  const userPromise = User.findByIdAndUpdate(userId, {
+    $push: {
+      _arena: arena._id
+    }
+  });
+
+  await Promise.all([arena.save(), userPromise]);
+  res.send(arena);
+});
 
 router
   .route('/')
