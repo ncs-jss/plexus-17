@@ -19,7 +19,7 @@ class EventList extends Component {
   }
 
   renderEventItems() {
-    return this.props.event.map(event => {
+    return this.props.event.eventList.data.map(event => {
       return <EventItem baseUrl={this.baseUrl} event={event} key={event._id} />;
     });
   }
@@ -36,5 +36,3 @@ class EventList extends Component {
 const mapStateToProps = ({ event }) => ({ event });
 
 export default connect(mapStateToProps, { listEvent })(EventList);
-
-// export default EventList;
