@@ -47,7 +47,8 @@ router.post('/:id/participate', isLogin, async (req, res) => {
   const userId = req.user.id;
   const existingArena = await Arena.findOne(
     {
-      _event: eventId
+      _event: eventId,
+      _user: userId
     },
     {
       lean: true

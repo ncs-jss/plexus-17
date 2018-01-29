@@ -6,7 +6,7 @@ export const createEvent = (values, history) => async dispatch => {
   history.push('/events');
   dispatch({
     type: EVENT_LIST,
-    payload: res.data
+    payload: res.body
   });
 };
 
@@ -23,7 +23,7 @@ export const listEvent = ({ limit = 10, skip = 0, fields = {}, include = [] } = 
   });
 };
 
-export const getEvent = (id, { fields = {}, preset, include = [], query_field } = {}) => async dispatch => {
+export const getEvent = (id, { fields = {}, preset, include = [], query_field = 'name' } = {}) => async dispatch => {
   const res = await request.get(`/api/events/${id}`).query({
     fields,
     include,
