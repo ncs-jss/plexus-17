@@ -88,7 +88,7 @@ router
   })
   .post(eventValidator('create'), isAdmin, async (req, res) => {
     try {
-      req.body = Object.assign(req.body, {
+      Object.assign(req.body, {
         state: 'toStart',
         createdBy: 'individual'
       });
