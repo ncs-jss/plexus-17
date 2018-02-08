@@ -55,7 +55,8 @@ router.post('/:id/participate', isLogin, async (req, res) => {
     }
   );
   if (existingArena) {
-    return res.status(403).send({
+    return res.status(200).send({
+      content: existingArena,
       error: 'Arena for this event already exists'
     });
   }
@@ -70,7 +71,7 @@ router.post('/:id/participate', isLogin, async (req, res) => {
   });
 
   await Promise.all([arena.save(), userPromise]);
-  res.send(arena);
+  res.status(201).send(arena);
 });
 
 router
